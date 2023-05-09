@@ -125,7 +125,7 @@ export class CreateInventory extends Component {
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                     <div class="">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Product ID
+                                                            Inventory ID
                                                         </label>
                                                         <input
                                                             type="text"
@@ -139,7 +139,7 @@ export class CreateInventory extends Component {
                                                 <div className="grid grid-cols-2 gap-4 form-group">
                                                     <div className="form-group">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Product Name
+                                                        Inventory Name
                                                         </label>
                                                         <input type="text"
                                                             required
@@ -150,7 +150,7 @@ export class CreateInventory extends Component {
                                                     </div>
                                                     <div class="">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                            Product Category
+                                                        Inventory Category
                                                         </label>
                                                         <input type="text"
                                                             required

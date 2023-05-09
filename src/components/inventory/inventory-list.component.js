@@ -98,7 +98,7 @@ export class InventoryList extends Component {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful',
-                    text: "Employee has been deleted!!",
+                    text: "Inventory has been deleted!!",
                     background: '#fff',
                     confirmButtonColor: '#0a5bf2',
                     iconColor: '#60e004'

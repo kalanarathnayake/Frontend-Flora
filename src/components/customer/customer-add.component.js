@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import * as Swal from "sweetalert2";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"
 
 export class CreateCustomer extends Component {
     constructor(props) {
@@ -14,7 +16,7 @@ export class CreateCustomer extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             fullName: '',
-            dob: '',
+            dob: new Date(),
             NIC: '',
             email: '',
             contactNo: '',
@@ -114,15 +116,14 @@ export class CreateCustomer extends Component {
                         })
                     }
                 })
-            window.location = '/customer';
+            // window.location = '/customer';
         }
     }
 
     //method fot clear data in the form
     clearData = () => {
         this.setState({
-            fullName: '',
-            dob: '',
+            fullName:new Date(),
             NIC: '',
             email: '',
             contactNo: '',
@@ -160,7 +161,7 @@ export class CreateCustomer extends Component {
                                                     required
                                                     className="form-control"
                                                     value={this.state.email}
-                                                    onChange={this.onChangeemail}
+                                                    onChange={this.onChangeEmail}
                                                 /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.emailError}</p>
                                             </div>
                                             <div className="form-group">
@@ -169,8 +170,8 @@ export class CreateCustomer extends Component {
                                                     required
                                                     className="form-control"
                                                     value={this.state.contactNo}
-                                                    onChange={this.onChangecontactNo}
-                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactError}</p>
+                                                    onChange={this.onChangeContactNo}
+                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactNoError}</p>
                                             </div>
                                         </div>
 
@@ -178,7 +179,9 @@ export class CreateCustomer extends Component {
                                             <div className="form-group">
                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Date Of Birth</label>
                                                 <DatePicker
-                                                    disabled
+                                                    viewBox="0 0 20 40"
+                                                    required
+                                                    dateFormat="MMMM d, yyyy"
                                                     className='m-2'
                                                     selected={this.state.dob}
                                                     onChange={this.onChangeDob}

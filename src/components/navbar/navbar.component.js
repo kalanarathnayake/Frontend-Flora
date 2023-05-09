@@ -17,9 +17,10 @@ class navbar extends Component {
     // const loggedUser = AuthenticationService.loggedUserName();
     let loggedAsEManager = false;
     let loggedAsCManager = false;
+    let loggedAsSManager = false;
     let loggedAsIManager = false;
-    let loggedAsWStaff = false;
-    let loggedAsHChef = false;
+    // let loggedAsWStaff = false;
+    let loggedAsGHManager = false;
     let loggedAsDManager = false;
     let loggedAsPManager = false;
     let loggedAsFManager = false;
@@ -36,13 +37,14 @@ class navbar extends Component {
     if (loggedUserRole != null && loggedUserRole === 'Customer Manager') {
       loggedAsCManager = true;
     }
+    if (loggedUserRole != null && loggedUserRole === 'Supplier Manager') {
+      loggedAsSManager = true;
+    }
     if (loggedUserRole != null && loggedUserRole === 'Inventory Manager') {
       loggedAsIManager = true;
-    } if (loggedUserRole != null && loggedUserRole === 'Waiter Staff') {
-      loggedAsWStaff = true;
-    }
-    if (loggedUserRole != null && loggedUserRole === 'Head Chef') {
-      loggedAsHChef = true;
+    } 
+    if (loggedUserRole != null && loggedUserRole === 'Green House Manager') {
+      loggedAsGHManager = true;
     }
     if (loggedUserRole != null && loggedUserRole === 'Delivery Manager') {
       loggedAsDManager = true;
@@ -84,11 +86,11 @@ class navbar extends Component {
                     <>
                       <div>
                         <a href="/employee" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Employees</a>
-                        <a href="/feedback" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Feedback</a>
+                        {/* <a href="/feedback" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Feedback</a>
                         <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
                         <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
                         <a href="/creatSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Add Schedule</a>
-                        <a href="/scheduleRequestLsit" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedule Requests</a>
+                        <a href="/scheduleRequestLsit" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedule Requests</a> */}
                       </div>
                     </>
                   }
@@ -96,7 +98,7 @@ class navbar extends Component {
                   {loggedAsCManager &&
                     <div>
                       <a href="/customer" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Customer</a>
-                      <a href="/creatFeedback" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Add Feedback</a>
+                     
                     </div>
                   }
 
@@ -105,33 +107,24 @@ class navbar extends Component {
                       <div>
                         <a href="/inventory" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory</a>
                         <a href="/inventoryorder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory Order</a>
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
+                        {/* <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
+                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a> */}
 
                       </div>
                     </>
                   }
 
-                  {loggedAsWStaff &&
+                  
+
+                  {loggedAsGHManager &&
                     <>
                       <div>
-                        <a href="/order" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Orders</a>
-
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
-                      </div>
-                    </>
-                  }
-
-                  {loggedAsHChef &&
-                    <>
-                      <div>
-                        <a href="/kitchenOrder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Kitchen Orders</a>
-                        <a href="/inventorylistfororder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Order Inventory</a>
+                        <a href="/greenHouse" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Green House</a>
+                        {/* <a href="/inventorylistfororder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Order Inventory</a>
 
                         <a href="/iokitchen" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory Order</a>
                         <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
+                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a> */}
 
                       </div>
                     </>

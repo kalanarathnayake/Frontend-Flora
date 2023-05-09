@@ -5,21 +5,20 @@ import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Modal } from "react-bootstrap";
-import EditCustomer from './customer-edit.component';
+import EditGreenHouse from './greenHouse-edit.component';
 
-const Customer = props => (
+const GreenHouse = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-        <td className='px-6 py-4'>{props.customer.fullName}</td>
-        <td className='px-6 py-4'>{props.customer.dob.substring(0, 10)}</td>
-        <td className='px-6 py-4'>{props.customer.NIC}</td>
-        <td className='px-6 py-4'>{props.customer.email}</td>
-        <td className='px-6 py-4'>{props.customer.contactNo}</td>
-        <td className='px-6 py-4'>{props.customer.address}</td>
+        <td className='px-6 py-4'>{props.greenHouse.ghID}</td>
+        <td className='px-6 py-4'>{props.greenHouse.name}</td>
+        <td className='px-6 py-4'>{props.greenHouse.contactNo}</td>
+        <td className='px-6 py-4'>{props.greenHouse.email}</td>
+        <td className='px-6 py-4'>{props.greenHouse.address}</td>
+
         <td className='px-6 py-4'>
             <div class="flex justify-center">
                 <div class="">
-                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateCustomer(props.customer._id) }}>
-
+                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateGreenHouse(props.greenHouse._id) }}>
                         <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
                             <div class="">
                                 <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,18 +29,19 @@ const Customer = props => (
                                 Edit
                             </div>
                         </div>
-
                     </button>
                 </div>
                 <div class="">
-                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200' onClick={() => { props.deleteCustomer(props.customer._id) }}>
-                        <div class="">
-                            <svg class="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </div>
-                        <div class="">
-                            Delete
+                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200' onClick={() => { props.deleteGreenHouse(props.greenHouse._id) }}>
+                        <div class="grid grid-cols-2 gap-1 hover:text-black">
+                            <div class="">
+                                <svg class="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </div>
+                            <div>
+                                Delete
+                            </div>
                         </div>
                     </button>
                 </div>
@@ -50,104 +50,103 @@ const Customer = props => (
     </tr>
 )
 
-export class CustomerList extends Component {
+export class GreenHouseList extends Component {
     constructor(props) {
         super(props);
-        this.deleteCustomer = this.deleteCustomer.bind(this);
-        this.gotoUpdateCustomer = this.gotoUpdateCustomer.bind(this);
+        this.deleteGreenHouse = this.deleteGreenHouse.bind(this);
+        this.gotoUpdateGreenHouse = this.gotoUpdateGreenHouse.bind(this);
         this.state = {
-            customer: [],
-            searchCustomer: "",
+            greenHouse: [],
+            searchGreenHouse: "",
             show: false
         };
     }
 
     refreshList() {
-        axios.get('http://localhost:5000/customer/')
+        axios.get('http://localhost:5000/greenHouse/')
             .then(response => {
-                this.setState({ customer: response.data })
+                this.setState({ greenHouse: response.data })
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-
     componentDidMount() {
         this.refreshList();
     }
 
-    gotoUpdateCustomer = (id) => {
+    gotoUpdateGreenHouse = (id) => {
         this.setState({
             id: id,
             show: true
+
         })
-        console.log("List id is :" + id);
+        console.log("LIst id is :" + id);
     }
 
+    //Modal box
     closeModalBox = () => {
         this.setState({ show: false })
         this.refreshList();
     }
 
-    deleteCustomer(id) {
-        axios.delete('http://localhost:5000/customer/' + id)
-            .then(response => {
-                console.log(response.status)
-                if (response.status == 200) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: "Customer has been deleted!!",
-                        background: '#fff',
-                        confirmButtonColor: '#0a5bf2',
-                        iconColor: '#60e004'
-                    })
-                    this.refreshList();
-                }
-                else {
-                    Swal.fire({
-                        icon: 'Unsuccess',
-                        title: 'Unsuccessfull',
-                        text: "Customer has not been deleted!!",
-                        background: '#fff',
-                        confirmButtonColor: '#eb220c',
-                        iconColor: '#60e004'
-                    })
-                }
-            })
+    deleteGreenHouse(id) {
+        axios.delete('http://localhost:5000/greenHouse/' + id).then(response => {
+            console.log(response.status)
+            if (response.status == 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful',
+                    text: "Green House has been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#0a5bf2',
+                    iconColor: '#60e004'
+                })
+                this.refreshList();
+            }
+            else {
+                Swal.fire({
+                    icon: 'Unsuccess',
+                    title: 'Unsuccessfull',
+                    text: "Green House has not been deleted!!",
+                    background: '#fff',
+                    confirmButtonColor: '#eb220c',
+                    iconColor: '#60e004'
+                })
+            }
+        })
     }
 
-    customerList() {
-        return this.state.customer.map(currentcustomer => {
-            return <Customer
-                customer={currentcustomer}
-                deleteCustomer={this.deleteCustomer}
-                gotoUpdateCustomer={this.gotoUpdateCustomer}
-                key={currentcustomer._id}
+    greenHouseList() {
+        return this.state.greenHouse.map(currentgreen => {
+            return <GreenHouse
+                greenHouse={currentgreen}
+                deleteGreenHouse={this.deleteGreenHouse}
+                gotoUpdateGreenHouse={this.gotoUpdateGreenHouse}
+                key={currentgreen._id}
             />;
         })
     }
 
-    searchCustomerList() {
-        return this.state.customer.map((currentcustomer) => {
+    searchGreenHouseList() {
+        return this.state.greenHouse.map((currentgreen) => {
             if (
-                this.state.searchCustomer == currentcustomer.NIC
+                this.state.searchGreenHouse ==
+                currentgreen.ghID
             ) {
                 return (
                     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-                        <td className='px-6 py-4'>{currentcustomer.fullName}</td>
-                        <td className='px-6 py-4'>{currentcustomer.dob.substring(0, 10)}</td>
-                        <td className='px-6 py-4'>{currentcustomer.NIC}</td>
-                        <td className='px-6 py-4'>{currentcustomer.email}</td>
-                        <td className='px-6 py-4'>{currentcustomer.contactNo}</td>
-                        <td className='px-6 py-4'>{currentcustomer.address}</td>
-
+                        <td className='px-6 py-4'>{currentgreen.ghID}</td>
+                        <td className='px-6 py-4'>{currentgreen.name}</td>
+                        <td className='px-6 py-4'>{currentgreen.contactNo}</td>
+                        <td className='px-6 py-4'>{currentgreen.email}</td>
+                        <td className='px-6 py-4'>{currentgreen.address}</td>
+                        
                         <td className='flex justify-center px-6 py-4 '>
                             {
                                 <div class="">
-                                    <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateCustomer(currentcustomer._id) }}>
-
+                                    <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateGreenHouse(currentgreen._id) }}>
                                         <div class=" grid grid-cols-2 gap-1">
                                             <div class="">
                                                 <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -158,7 +157,6 @@ export class CustomerList extends Component {
                                                 Edit
                                             </div>
                                         </div>
-
                                     </button>
                                 </div>
                             }
@@ -166,7 +164,10 @@ export class CustomerList extends Component {
                             {
                                 <div class="">
                                     <button className='inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-200'
-                                        onClick={() => { this.deleteCustomer(currentcustomer._id) }}>
+                                        onClick={() => {
+                                            //Delete the selected record
+                                            this.deleteGreenHouse(currentgreen._id)
+                                        }}>
                                         <div class=" grid grid-cols-2 gap-1">
                                             <div class="">
                                                 <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -187,36 +188,36 @@ export class CustomerList extends Component {
         });
     }
 
-    //pdf export method
-    exportCustomer = () => {
+
+    exportGreenHouse = () => {
         console.log("Export PDF")
         const unit = "pt";
         const size = "A3";
-        const orientation = "portrait";
+        const orientation = "landscape";
         const marginLeft = 40;
         const doc = new jsPDF(orientation, unit, size);
-        const title = "Customer List Report ";
-        const headers = [["Full Name", "Date Of Birth", "NIC", "Email", "Contact Number", "Address"]];
-        const customerDataSet = this.state.customer.map(
-            Customer => [
-                Customer.fullName,
-                Customer.dob,
-                Customer.NIC,
-                Customer.email,
-                Customer.contactNo,
-                Customer.address
+        const title = "Green House List Report ";
+        const headers = [["Green House ID", "Name", "Contact Number", "Email", "Address"]];
+        const emp = this.state.greenHouse.map(
+            GreenHouse => [
+                GreenHouse.ghID,
+                GreenHouse.name,
+                GreenHouse.contactNo,
+                GreenHouse.email,
+                GreenHouse.address,
+                GreenHouse.position
             ]
         );
         let content = {
             startY: 50,
             head: headers,
-            body: customerDataSet
+            body: emp
         };
         doc.setFontSize(20);
         doc.text(title, marginLeft, 40);
         require('jspdf-autotable');
         doc.autoTable(content);
-        doc.save("Customer-list.pdf")
+        doc.save("Green House-list.pdf")
     }
 
     //render method
@@ -227,18 +228,18 @@ export class CustomerList extends Component {
                     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className='items-center overflow-hidden'>
                             <div class="grid grid-cols-1 gap-4 content-start">
-                                <table >
+                                <table className=''>
                                     <tr>
                                         <th className='drop-shadow-md'>
-                                            <h3>Customer Details</h3>
+                                            <h3>Green House Details</h3>
                                         </th>
                                         <td className='flex justify-end gap-2'>
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end gap-2">
                                                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                    <Link className='font-semibold text-white no-underline' to={"/creatCustomer"}>
-                                                        Add Customer
+                                                    <Link className='font-semibold text-white no-underline' to={"/createGreenHouse"}>
+                                                        Add Green House
                                                     </Link></button>
-                                                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => this.exportCustomer()}>
+                                                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => this.exportGreenHouse()}>
                                                     Download Report Here
                                                 </button>
                                             </div>
@@ -246,13 +247,14 @@ export class CustomerList extends Component {
                                                 <input
                                                     className="form-control rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                                                     type="text"
-                                                    placeholder="Search by NIC"
+                                                    placeholder="Search by Green House ID"
                                                     aria-label="Search"
                                                     onChange={(e) => {
                                                         this.setState({
-                                                            searchCustomer: e.target.value
+                                                            searchGreenHouse: e.target.value
                                                         });
-                                                    }} />
+                                                    }}
+                                                />
                                             </div>
                                         </td>
                                     </tr>
@@ -262,24 +264,24 @@ export class CustomerList extends Component {
                                 <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400' >
                                     <thead className='p-5 text-xs text-gray-700 uppercase border bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                                         <tr>
-                                            <th className="p-2 border-black tbhead ">Customer Name</th>
-                                            <th className="p-2 tbhead ">Date Of Birth</th>
-                                            <th className="p-2 tbhead ">NIC</th>
-                                            <th className="p-2 tbhead">Email</th>
+                                            <th className="p-2 border-black tbhead ">Green House ID</th>
+                                            <th className="p-2 tbhead">Green House Name</th>
                                             <th className="p-2 tbhead">Contact Number</th>
+                                            <th className="p-2 tbhead">Email</th>
                                             <th className="p-2 tbhead">Address</th>
+                                            <th className="p-2 tbhead">Position</th>
                                             <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {this.state.searchCustomer == "" ? this.customerList() : this.searchCustomerList()}
+                                    <tbody >
+                                        {this.state.searchGreenHouse == "" ? this.greenHouseList() : this.searchGreenHouseList()}
                                     </tbody>
                                 </table>
                             </div>
                             <div class="">
                                 <Modal show={this.state.show} onHide={this.closeModalBox} centered size={"xl"}>
                                     <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
-                                        <EditCustomer cusId={this.state.id} key={this.state.id} close={this.closeModalBox} />
+                                        <EditGreenHouse ghId={this.state.id} key={this.state.id} close={this.closeModalBox} />
                                     </Modal.Body>
                                 </Modal>
                             </div>
