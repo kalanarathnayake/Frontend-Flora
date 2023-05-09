@@ -12,7 +12,6 @@ export class CreateEmployee extends Component {
         this.onChangeaddress = this.onChangeaddress.bind(this);
         this.onChangeposition = this.onChangeposition.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
         this.state = {
             empID: '',
             fullName: '',
@@ -59,9 +58,9 @@ export class CreateEmployee extends Component {
         });
     }
 
+    //onsubmit method
     onSubmit(e) {
         e.preventDefault();
-
         const employee = {
             empID: this.state.empID,
             fullName: this.state.fullName,
@@ -71,62 +70,50 @@ export class CreateEmployee extends Component {
             position: this.state.position
         }
 
+        //check payload
         console.log(employee);
 
+        //validations
         const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-        if(this.state.empID.length < 10 || this.state.empID.length > 10){
-            this.setState({empIDError : "Employee ID should be 10 characters."})
-        }
-        else if(this.state.fullName.length < 6){
-            this.setState({nameError : "Name should be longer than 6 characters."})
-        }
-        else if(this.state.contactNo.length != 10){
-            this.setState({contactNoError : "Contact Number is invalid."})
-
-        }else if (!this.state.email || regex.test(this.state.email) === false){
+        if (this.state.empID.length < 10 || this.state.empID.length > 10) {
+            this.setState({ empIDError: "Employee ID should be 10 characters." })
+        } else if (this.state.fullName.length < 6) {
+            this.setState({ nameError: "Name should be longer than 6 characters." })
+        } else if (this.state.contactNo.length != 10) {
+            this.setState({ contactNoError: "Contact Number is invalid." })
+        } else if (!this.state.email || regex.test(this.state.email) === false) {
             this.setState({ emailError: "Please Enter a valid email." })
-
         } else if (this.state.address.length < 10) {
             this.setState({ addressError: "Your address is too short." })
-
-        }else if (this.state.address.position < 4) {
+        } else if (this.state.address.position < 4) {
             this.setState({ positionError: "Your position is too short." })
-
-        }else {
-
-      
-        axios.post('http://localhost:5000/employee/', employee)
-            
-
-            .then(res => {
-
-                console.log(res);
-
-                if (res.status === 200) {
-                    this.clearData();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: 'Employee has been added!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error in adding!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#e00404'
-                    })
-                }
-            })
+        } else {
+            axios.post('http://localhost:5000/employee/', employee)
+                .then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.clearData();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successful',
+                            text: 'Employee has been added!!',
+                            background: '#fff',
+                            confirmButtonColor: '#333533',
+                            iconColor: '#60e004'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error in adding!',
+                            background: '#fff',
+                            confirmButtonColor: '#333533',
+                            iconColor: '#e00404'
+                        })
+                    }
+                })
         }
-        // window.location = '/employee';
     }
 
     clearData = () => {
@@ -185,7 +172,7 @@ export class CreateEmployee extends Component {
                                                         value={this.state.contactNo}
                                                         onChange={this.onChangecontactNo}
                                                     />
-                                                   <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactNoError}</p>
+                                                    <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactNoError}</p>
                                                 </div>
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Email</label>
@@ -226,7 +213,7 @@ export class CreateEmployee extends Component {
                                                     <option>Financial Manager</option>
                                                     <option>Product Manager</option>
                                                 </select>
-                                                
+
                                                 <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.positionError}</p>
                                             </div>
                                             <div className="text-center align-middle form-group">

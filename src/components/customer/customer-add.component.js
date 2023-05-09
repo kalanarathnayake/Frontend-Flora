@@ -194,7 +194,6 @@ export class CreateCustomer extends Component {
                                                 /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.nicError}</p>
                                             </div>
                                         </div>
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Address</label>
                                             <input type="text"
@@ -204,14 +203,11 @@ export class CreateCustomer extends Component {
                                                 onChange={this.onChangeAddress}
                                             /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.addressError}</p>
                                         </div>
-
                                         <div className="text-center align-middle form-group">
                                             <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Create Customer" />
                                         </div>
                                     </div>
-
                                 </form>
-
                             </div>
                         </div>
                     </div>
