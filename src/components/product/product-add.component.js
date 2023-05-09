@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import * as Swal from "sweetalert2";
-
+import { storage } from "../../firebase";
 
 export class CreateProduct extends Component {
     constructor(props) {
@@ -9,21 +9,66 @@ export class CreateProduct extends Component {
         this.onChangeproductID = this.onChangeproductID.bind(this);
         this.onChangeproductName = this.onChangeproductName.bind(this);
         this.onChangeproductCategory = this.onChangeproductCategory.bind(this);
+        this.onChangedescription = this.onChangedescription.bind(this);
+        this.onChangeimage = this.onChangeimage.bind(this);
         this.onChangeproductSize = this.onChangeproductSize.bind(this);
         this.onChangeprice = this.onChangeprice.bind(this);
         this.onChangediscount = this.onChangediscount.bind(this);
         this.onChangeavailability = this.onChangeavailability.bind(this);
+        // this.uploadImage = this.uploadImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             productID: '',
             productName: '',
             productCategory: '',
-            productSize: '',
+            description: '',
+            image: '',
             price: '',
-            discount: '',
+            discount: 0,
             availability: ''
         }
     }
+
+    uploadImage = (e) => {
+        if (e.target.files[0] !== null) {
+            const fileName = e.target.files[0].name + "-" + new Date();
+            const uploadTask = storage
+                .ref(`Products/${fileName}`)
+                .put(e.target.files[0]);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    //progress function
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                },
+                (error) => {
+                    //error function
+                    console.log(error);
+                },
+                () => {
+                    //complete function
+                    storage
+                        .ref("digitalbook")
+                        .child(fileName)
+                        .getDownloadURL()
+                        .then((url) => {
+                            // this.image(url);
+                            this.setState({
+                                image: url
+                            });
+                        });
+
+                    this.setState({
+                        image: e.target.value
+                    });
+                }
+            );
+        } else {
+            console.log("Something went wrong");
+        }
+    };
 
     onChangeproductID(e) {
         this.setState({
@@ -43,11 +88,17 @@ export class CreateProduct extends Component {
         });
     }
 
-    onChangeproductSize(e) {
+    onChangedescription(e) {
         this.setState({
-            productSize: e.target.value
+            description: e.target.value
         });
     }
+
+    // onChangeimage(e) {
+    //     this.setState({
+    //         image: e.target.value
+    //     });
+    // }
 
     onChangeprice(e) {
         this.setState({
@@ -67,15 +118,24 @@ export class CreateProduct extends Component {
         });
     }
 
+    // productID: '',
+    // productName: '',
+    // productCategory: '',
+    // description: '',
+    // image: '',
+    // price: '',
+    // discount: 0,
+    // availability: ''
+
     onSubmit(e) {
         e.preventDefault();
-
         const shortid = require('shortid');
         const product = {
-            // productID: this.state.productID,
-            productID:shortid.generate(),
+            productID: shortid.generate(),
             productName: this.state.productName,
             productCategory: this.state.productCategory,
+            description: this.state.description,
+            image: this.state.image,
             productSize: this.state.productSize,
             price: this.state.price,
             discount: this.state.discount,
@@ -84,9 +144,6 @@ export class CreateProduct extends Component {
 
         console.log(product);
 
-        // if (this.state.productID.length < 3) {
-        //     this.setState({ proIDError: "Product ID should be longer than 3 characters." })
-        // }
         if (this.state.productName.length < 3) {
             this.setState({ nameError: "Product Name should be longer than 3 characters." })
         }
@@ -151,17 +208,6 @@ export class CreateProduct extends Component {
                                         <p className='text-4xl font-semibold text-black uppercase'>
                                             Add Product
                                         </p>
-                                        {/* <div className="form-group">
-                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product ID</label>
-                                            <input type="text"
-                                                required
-                                                placeholder='P00x'
-                                                className="form-control"
-                                                value={this.state.productID}
-                                                onChange={this.onChangeproductID}
-                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.proIDError}</p>
-                                        </div> */}
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Name</label>
                                             <input type="text"
@@ -170,9 +216,7 @@ export class CreateProduct extends Component {
                                                 value={this.state.productName}
                                                 onChange={this.onChangeproductName}
                                             /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nameError}</p>
-
                                         </div>
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Category</label>
                                             <select type="text"
@@ -185,31 +229,22 @@ export class CreateProduct extends Component {
                                                 <option>Pizza</option>
                                                 <option>Beverage</option>
                                                 <option>Other</option>
-
                                             </select><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productCategoryError}</p>
-
                                         </div>
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Size</label>
                                             <select type="text"
-
                                                 className="form-control"
                                                 value={this.state.productSize}
                                                 onChange={this.onChangeproductSize}
                                             >
-
                                                 <option>Select From Here</option>
                                                 <option>Small</option>
                                                 <option>Medium</option>
                                                 <option>Large</option>
-
                                             </select>
-
                                             <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productSizeError}</p>
-
                                         </div>
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Price (LKR)</label>
                                             <input type="text"
@@ -218,9 +253,7 @@ export class CreateProduct extends Component {
                                                 value={this.state.price}
                                                 onChange={this.onChangeprice}
                                             /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.priceError}</p>
-
                                         </div>
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Discount (LKR)</label>
                                             <input type="text"
@@ -229,13 +262,10 @@ export class CreateProduct extends Component {
                                                 value={this.state.discount}
                                                 onChange={this.onChangediscount}
                                             />
-
                                         </div>
-
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Availability</label>
                                             <select type="text"
-
                                                 className="form-control"
                                                 value={this.state.availability}
                                                 onChange={this.onChangeavailability}
@@ -243,31 +273,32 @@ export class CreateProduct extends Component {
                                                 <option>Select From Here</option>
                                                 <option>Yes</option>
                                                 <option>No</option>
-
                                             </select><p />
-
                                         </div>
 
+                                        <div className="mb-6">
+                                            <label
+                                                className="block mb-2 font-medium text-gray-900 text-xxl dark:text-white"
+                                                for="file_input">
+                                                Upload Image
+                                            </label>
+                                            <input
+                                                className="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer text-xxl bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                                id="file_input"
+                                                onChange={(e) => this.uploadImage(e)}
+                                                type="file"
+                                                required />
+                                        </div>
                                         <div className="text-center align-middle form-group">
                                             <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Add Product" />
                                         </div>
                                     </div>
-
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
-
-
-
         )
     }
 }
