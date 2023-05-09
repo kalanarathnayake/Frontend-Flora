@@ -104,29 +104,32 @@ export class UserLogin extends Component {
                         iconColor: '#60e004'
                     })
 
-                    if (currentuser.userRole == "Employee Manager") {
+                    const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+
+                    if (isUserLoggedIn === true && currentuser.userRole == "Employee Manager") {
                         window.location = "/nav"
                         window.location = "/employee"
                     }
-                    else if (currentuser.userRole == "Customer Manager") {
+                    else if (isUserLoggedIn === true && currentuser.userRole == "Customer Manager") {
                         window.location = "/customer"
-                    } else if (currentuser.userRole == "Inventory Manager") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Inventory Manager") {
                         window.location = "/inventory"
-                    } else if (currentuser.userRole == "Head Chef") {
-                        window.location = "/kitchen"
-                    } else if (currentuser.userRole == "Waiter Staff") {
-                        window.location = "/order"
-                    } else if (currentuser.userRole == "Product Manager") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Product Manager") {
                         window.location = "/product"
-                    } else if (currentuser.userRole == "Delivery Manager") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Delivery Manager") {
                         window.location = "/delivery"
-                    } else if (currentuser.userRole == "Finance Manager") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Finance Manager") {
                         window.location = "/salary"
-                    } else if (currentuser.userRole == "Employee Manager") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Employee Manager") {
                         window.location = "/employee"
                     }
-                    else if (currentuser.userRole == "Green House Manager") {
+                    else if (isUserLoggedIn === true && currentuser.userRole == "Green House Manager") {
                         window.location = "/greenHouse"
+                    }else if (isUserLoggedIn === true && currentuser.userRole == "Supplier Manager") {
+                        window.location = "/supplier"
+                    } else if (isUserLoggedIn === false) {
+                        window.location = "/nav"
+                        window.location = "/"
                     }
 
                 } 
