@@ -153,6 +153,7 @@ export class UserRegistration extends Component {
                                                 <option>Finance Manager</option>
                                                 <option>Green House Manager</option>
                                                 <option>Supplier Manager</option>
+                                                <option>Customer</option>
 
                                             </select>
 

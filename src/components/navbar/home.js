@@ -34,8 +34,8 @@ class home extends Component {
 
     return (
       <div class="">
-      <div class="w-100 h-30">
-          <img src="https://ncc-website-2.s3.amazonaws.com/images/IMG_4748.jpg" alt="Jetwing Colombo Seven" />
+      <div class="w-100">
+          <img src="https://plazahollandi.com/wp-content/uploads/2020/09/bunches-of-tulips-scaled.jpg" alt="Jetwing Colombo Seven" />
       </div>
       <section class="">
           <div class="grid grid-cols-2 divide-x">
@@ -47,87 +47,45 @@ class home extends Component {
                   <p>Ravindra de Silva
                       Manager – Jetwing Colombo Seven</p>
               </div>
-              <div class="max-w-[90%] mx-auto px-5 py-5 lg:px-32 lg:pt-16">
-                  <img src="https://www.jetwinghotels.com/jetwingcolomboseven/wp-content/uploads/sites/4/2019/10/DSC_2849-1200x810.jpg" alt="Events" class="h-[25rem] w-[80rem] pr-8 hover:animate-pulse" />
+              <div class="max-w-[80%] mx-auto px-5 py-5 lg:px-32 lg:pt-16">
+                  <img src="https://media.istockphoto.com/id/1440711298/vector/white-lily-flower-vector-illustration.jpg?s=612x612&w=0&k=20&c=di2tNrJwMGXyQsbdpAPOpvyNpwekOD1w53i9mDK5fmU=" alt="Events" class="h-[25rem] w-[80rem] pr-8 hover:animate-pulse" />
               </div>
           </div>
       </section>
       {/* events and meetings */}
       <section class="">
           <div class="max-w-[90%] mx-auto px-5 pb-5 lg:px-32 lg:pt-12">
-              <img src="https://www.jetwinghotels.com/jetwingcolomboseven/wp-content/uploads/sites/4/2019/10/DSC_2133-Desktop-1920-x-656.jpg" alt="Events" />
+              <img src="https://www.1800flowers.com/blog/wp-content/uploads/2021/05/Birthday-Flowers-Colors.jpg" alt="Events" />
           </div>
           <div class="text-center bg-white text-gray-800 px-6">
-              <h1 class="text-5xl text-blue-950 md:text-6xl xl:text-3xl font-bold tracking-tight uppercase drop-shadow-md ">Events and Meetings<br />
+              <h1 class="text-5xl text-blue-950 md:text-6xl xl:text-3xl font-bold tracking-tight uppercase drop-shadow-md ">Our Services<br />
               </h1>
           </div>
       </section>
-      <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12 " >
-          <div class="p-10">
-              <a href="/" class=" flex no-underline text-black flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-7xl h-96 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                  <div class="flex flex-col justify-between p-4 leading-normal">
-                      <table>
-                          
-                      </table>
-                  </div>
-              </a>
+      <div class=" container mx-auto px-5 py-2 lg:px-32 lg:pt-12 mb-5 grid grid-cols-3 content-center" >
+          <div className="shadow-xl card w-96 bg-base-100 hover:scale-105">
+            <figure><img src="https://i0.wp.com/www.figandbloom.com/wp-content/uploads/2023/01/F_B_Blog_Pretty-in-Pink_V22.jpg?fit=860%2C860&ssl=1" alt="Shoes" class="h-72" /></figure>
+            <div className="card-body">
+              <h2 className="justify-center pb-2 text-2xl card-title">Jetwing Sea</h2>
+              <p class="text-center">Born out of the historic splendour of Jetwing Seashells from 1978, our home has since grown into a symbol of modern elegance among Sri Lankan beach resorts. The enchantment of this nostalgic coastline has stayed true to our legendary family values.</p>
+            </div>
           </div>
-      </div>
-      <section class="">
-          <div class="text-center bg-white text-gray-800 px-6">
-              <h1 class="text-5xl text-blue-950 md:text-6xl xl:text-3xl font-bold tracking-tight uppercase drop-shadow-md ">Weddings<br />
-              </h1>
+          <div className="shadow-xl card w-96 bg-base-100 hover:scale-105">
+            <figure><img src="https://wallpapershome.com/images/pages/pic_h/6498.jpg" alt="Shoes" class="h-72" /></figure>
+            <div className="card-body">
+              <h2 className="justify-center pb-2 text-2xl card-title">Jetwing Blue</h2>
+              <p class="text-center">It all began here – at our original home of Sri Lankan hospitality. The home in which we welcomed the world as part of our family, and treated the world as one of our own</p>
+            </div>
           </div>
-      </section>
-      <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12 mb-5 grid grid-cols-3 content-center ">
-          
-      </div>
-      {/* Accomodations*/}
-      <section class="">
-          <div class="max-w-[90%] mx-auto px-5 py-5 lg:px-32 lg:pt-12">
-              <table>
-                  <tr>
-                      <td rowspan="2"><div >
-                          <img src="https://www.jetwinghotels.com/jetwingcolomboseven/wp-content/uploads/sites/4/2019/08/Gallery1-2.jpg" alt="Events" class="h-[30rem] w-[100rem] transition duration-300 ease-in-out hover:opacity-40" />
-                      </div></td>
-                      <td><div >
-                          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/84/59/c5/rooftop-infinity-pool.jpg?w=1100&h=-1&s=1" alt="Events" class="h-[15rem] w-[80rem] transition duration-300 ease-in-out hover:opacity-40" />
-                      </div></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div >
-                              <img src="https://i0.wp.com/colombocitynews.com/wp-content/uploads/2022/06/vir_1.jpg?fit=1200%2C900&ssl=1" alt="Events" class="h-[15rem] w-[80rem] transition duration-300 ease-in-out hover:opacity-40" />
-                          </div>
-                      </td>
-                  </tr>
-              </table>
+          <div className="shadow-xl card w-96 bg-base-100 hover:scale-105">
+            <figure><img src="https://wallpapershome.com/images/pages/pic_h/336.jpg" alt="Shoes" class="h-72" /></figure>
+            <div className="card-body">
+              <h2 className="justify-center pb-2 text-2xl card-title">Jetwing Colombo Seven</h2>
+              <p class="text-center">Built upon the land where our founder once resided, this exotic metropolis we call home is where our legendary hospitality shines the brightest – a privilege we extend to the world, as we take you in with open arms.</p>
+            </div>
           </div>
-      </section>
-      <section class="">
-          <div class="text-center bg-white text-gray-800 px-6">
-              <h1 class="text-5xl md:text-6xl xl:text-3xl font-bold tracking-tight uppercase drop-shadow-md text-blue-950 ">Accomodations<br />
-              </h1>
-          </div>
-      </section>
-      <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12 " >
-          <div class="p-10">
-              <div class="py-2 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow  md:max-w-7xl  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                  <table>
-                      <thead className='justify-center'>
-                          <tr>
-                              <th class="pl-12 py-2">Room Name</th>
-                              <th class="pl-12 py-2">Size</th>
-                              <th class="pl-8 py-2">Number Of People</th>
-                              <th class="pl-8 py-2">Price</th>
-                              <th class="pl-42 py-2">Features</th>
-                              <th class="pl-12 py-2">Book Here</th>
-                          </tr>
-                      </thead>
-                      </table>
-              </div>
-          </div>
-      </div>
+        </div>
+      
      
       {/*  */}
       <section class="">

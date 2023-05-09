@@ -109,6 +109,9 @@ export class UserLogin extends Component {
                     if (isUserLoggedIn === true && currentuser.userRole == "Employee Manager") {
                         window.location = "/nav"
                         window.location = "/employee"
+                    }else if (isUserLoggedIn === true && currentuser.userRole == "Customer") {
+                        window.location = "/nav"
+                        window.location = "/cus"
                     }
                     else if (isUserLoggedIn === true && currentuser.userRole == "Customer Manager") {
                         window.location = "/customer"
