@@ -12,6 +12,7 @@ export default class EditInventory extends Component {
         this.onChangeproductDiscription = this.onChangeproductDiscription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
+            id:props.invId,
             productID: '',
             productName: '',
             productCategory: '',
@@ -96,7 +97,7 @@ export default class EditInventory extends Component {
                         Swal.fire({
                             icon: 'success',
                             title: 'Successful',
-                            text: 'Employee has been updated!!',
+                            text: 'Inventory has been updated!!',
                             background: '#fff',
                             confirmButtonColor: '#333533',
                             iconColor: '#60e004'

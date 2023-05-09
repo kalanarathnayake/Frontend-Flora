@@ -52,6 +52,8 @@ import { UserRegistration } from './components/user/user-registration.component'
 import { UserLogin } from './components/user/user-login.component';
 
 import Home from "./components/navbar/home";
+import { GreenHouseList } from './components/greenHouse/greenHouse-list.component';
+import { CreateGreenHouse } from './components/greenHouse/greenHouse-add.component';
 initTE({ Carousel }, true); // set second parameter to true if you want to use a debugger
 
 function App() {
@@ -137,6 +139,9 @@ function App() {
           <Route exact path="/iokitchen" element={<InventoryOrderListKitchen />} />{/* Done */}
 
           <Route exact path="/payment" element={<CreatePayment />} />{/* Done */}
+
+          <Route exact path="/greenHouse" element={<GreenHouseList />} />{/* Done */}
+          <Route exact path="/createGreenHouse" element={<CreateGreenHouse />} />{/* Done */}
           
         </Routes>
       </Router>

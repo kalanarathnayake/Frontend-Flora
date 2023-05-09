@@ -125,6 +125,9 @@ export class UserLogin extends Component {
                     } else if (currentuser.userRole == "Employee Manager") {
                         window.location = "/employee"
                     }
+                    else if (currentuser.userRole == "Green House Manager") {
+                        window.location = "/greenHouse"
+                    }
 
                 } 
                 // else {

@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from "sweetalert2";
 
-export default class EditEmployee extends Component {
+export default class EditGreenHouse extends Component {
     constructor(props) {
         super(props);
-        this.onChangeempID = this.onChangeempID.bind(this);
-        this.onChangefullName = this.onChangefullName.bind(this);
+        this.onChangeghID = this.onChangeghID.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
         this.onChangecontactNo = this.onChangecontactNo.bind(this);
         this.onChangeemail = this.onChangeemail.bind(this);
         this.onChangeaddress = this.onChangeaddress.bind(this);
         this.onChangeposition = this.onChangeposition.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-            id: props.empId,
-            empID: '',
-            fullName: '',
+            id:props.ghId,
+            ghID: '',
+            name: '',
             contactNo: '',
             email: '',
             address: '',
@@ -24,11 +24,11 @@ export default class EditEmployee extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/employee/' + this.state.id)
+        axios.get('http://localhost:5000/greenHouse/' + this.state.id)
             .then(response => {
                 this.setState({
-                    empID: response.data.empID,
-                    fullName: response.data.fullName,
+                    ghID: response.data.ghID,
+                    name: response.data.name,
                     contactNo: response.data.contactNo,
                     email: response.data.email,
                     address: response.data.address,
@@ -40,15 +40,15 @@ export default class EditEmployee extends Component {
             })
     }
 
-    onChangeempID(e) {
+    onChangeghID(e) {
         this.setState({
-            empID: e.target.value
+            ghID: e.target.value
         });
     }
 
-    onChangefullName(e) {
+    onChangeName(e) {
         this.setState({
-            fullName: e.target.value
+            name: e.target.value
         });
     }
 
@@ -78,22 +78,24 @@ export default class EditEmployee extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const employee = {
-            empID: this.state.empID,
-            fullName: this.state.fullName,
+        const greenHouse = {
+            ghID: this.state.ghID,
+            name: this.state.name,
             contactNo: this.state.contactNo,
             email: this.state.email,
             address: this.state.address,
-            position: this.state.position,
+            position: this.state.position
         }
-        //ckeck payload
-        console.log(employee);
 
+        //check payload
+        console.log(greenHouse);
+
+        //validations
         const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-        if (this.state.empID.length < 10 || this.state.empID.length > 10) {
-            this.setState({ empIDError: "Employee ID should be 10 characters." })
-        } else if (this.state.fullName.length < 6) {
+        if (this.state.ghID.length < 3 ) {
+            this.setState({ ghIDError: "Green House ID should be longer than 3 characters." })
+        } else if (this.state.name.length < 6) {
             this.setState({ nameError: "Name should be longer than 6 characters." })
         } else if (this.state.contactNo.length != 10) {
             this.setState({ contactNoError: "Contact Number is invalid." })
@@ -101,10 +103,8 @@ export default class EditEmployee extends Component {
             this.setState({ emailError: "Please Enter a valid email." })
         } else if (this.state.address.length < 10) {
             this.setState({ addressError: "Your address is too short." })
-        } else if (this.state.address.position < 4) {
-            this.setState({ positionError: "Your position is too short." })
         } else {
-        axios.put('http://localhost:5000/employee/' + this.state.id, employee)
+        axios.put('http://localhost:5000/greenHouse/' + this.state.id, greenHouse)
             .then(res => {
                 console.log(res);
                 if (res.status === 200) {
@@ -112,7 +112,7 @@ export default class EditEmployee extends Component {
                     Swal.fire({
                         icon: 'success',
                         title: 'Successful',
-                        text: 'Employee has been updated!!',
+                        text: 'Green House has been updated!!',
                         background: '#fff',
                         confirmButtonColor: '#333533',
                         iconColor: '#60e004'
@@ -145,7 +145,7 @@ export default class EditEmployee extends Component {
                                         <form onSubmit={this.onSubmit}>
                                             
                                                 <p className='text-4xl font-semibold text-black uppercase'>
-                                                    Update Employee
+                                                    Update Green House
                                                 </p>
                                                 <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
@@ -153,17 +153,17 @@ export default class EditEmployee extends Component {
                                                     <input type="text"
                                                         // required
                                                         className="form-control"
-                                                        value={this.state.empID}
-                                                        onChange={this.onChangeempID}
-                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.empIDError}</p>
+                                                        value={this.state.ghID}
+                                                        onChange={this.onChangeghID}
+                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.ghIDError}</p>
                                                 </div>
                                                 <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >Full Name</label>
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >Name</label>
                                                     <input type="text"
                                                         required
                                                         className="form-control"
-                                                        value={this.state.fullName}
-                                                        onChange={this.onChangefullName}
+                                                        value={this.state.name}
+                                                        onChange={this.onChangeName}
                                                     /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nameError}</p>
                                                 </div>
                                             </div>
@@ -198,29 +198,9 @@ export default class EditEmployee extends Component {
                                                 />
                                                 <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.addressError}</p>
                                             </div>
-                                            <div className="form-group">
-                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">Position</label>
-                                                <select type="text"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.position}
-                                                    onChange={this.onChangeposition}
-                                                >
-                                                    <option>Select From Here</option>
-                                                    <option>Waiter Staff</option>
-                                                    <option>Kitchen Head Chef</option>
-                                                    <option>Inventory Manager</option>
-                                                    <option>Driver</option>
-                                                    <option>Delivery Manager</option>
-                                                    <option>Employee Manager</option>
-                                                    <option>Financial Manager</option>
-                                                    <option>Product Manager</option>
-                                                </select>
-                                                <p />
-                                                <p />
-                                            </div>
+                                            
                                             <div className="text-center align-middle form-group">
-                                                <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Edit Employee" />
+                                                <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Edit Green House" />
                                             </div>
                                         </form>
                                     </div>

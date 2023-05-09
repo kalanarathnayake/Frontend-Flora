@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"
 
 
 export default class EditCustomer extends Component {
@@ -14,8 +16,9 @@ export default class EditCustomer extends Component {
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
+            id:props.cusId,
             fullName: '',
-            dob: '',
+            dob: new Date(),
             NIC: '',
             email: '',
             contactNo: '',
@@ -165,7 +168,7 @@ export default class EditCustomer extends Component {
                                                     required
                                                     className="form-control"
                                                     value={this.state.email}
-                                                    onChange={this.onChangeemail}
+                                                    onChange={this.onChangeEmail}
                                                 /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.emailError}</p>
                                             </div>
                                             <div className="form-group">
@@ -174,8 +177,8 @@ export default class EditCustomer extends Component {
                                                     required
                                                     className="form-control"
                                                     value={this.state.contactNo}
-                                                    onChange={this.onChangecontactNo}
-                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactError}</p>
+                                                    onChange={this.onChangeContactNo}
+                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactNoError}</p>
                                             </div>
                                         </div>
 
@@ -183,7 +186,9 @@ export default class EditCustomer extends Component {
                                             <div className="form-group">
                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Date Of Birth</label>
                                                 <DatePicker
-                                                    disabled
+                                                   viewBox="0 0 20 40"
+                                                   required
+                                                   dateFormat="MMMM d, yyyy"
                                                     className='m-2'
                                                     selected={this.state.dob}
                                                     onChange={this.onChangeDob}

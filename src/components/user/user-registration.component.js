@@ -147,12 +147,11 @@ export class UserRegistration extends Component {
                                                 <option>Select From Here</option>
                                                 <option>Employee Manager</option>
                                                 <option>Customer Manager</option>
-                                                <option>Waiter Staff</option>
-                                                <option>Head Chef</option>
                                                 <option>Inventory Manager</option>
                                                 <option>Delivery Manager</option>
                                                 <option>Product Manager</option>
                                                 <option>Finance Manager</option>
+                                                <option>Green House Manager</option>
 
                                             </select>
 
