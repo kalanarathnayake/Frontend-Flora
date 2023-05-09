@@ -192,12 +192,12 @@ export class CreateProduct extends Component {
 
     render() {
         return (
-            <div className="flex flex-col px-5 pt-2 ">
+            <div className="flex flex-col px-20 pt-2 mb-20 ">
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className='items-center overflow-hidden'>
                             <div class="grid grid-cols-1 gap-4 content-start pt-5 px-20">
-                                <form className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50' onSubmit={this.onSubmit}>
+                                <form className='px-32 py-20 border-2 rounded-lg shadow-md bg-gray-50' onSubmit={this.onSubmit}>
                                     <div class="">
                                         <p className='text-4xl font-semibold text-black uppercase'>
                                             Add Product
@@ -280,7 +280,7 @@ export class CreateProduct extends Component {
                                                 for="file_input">
                                                 Upload Image
                                             </label>
-                                            {this.image && <img src={this.image} alt='' />}
+                                            {this.state.image && <img className='object-contain w-48 h-48' src={this.state.image} alt='' />}
 
                                             <input
                                                 className="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer text-xxl bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

@@ -9,11 +9,11 @@ import { EditProduct } from './product-edit.component';
 
 const Product = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-       
         <td className='px-6 py-4'>{props.product.productID}</td>
         <td className='px-6 py-4'>{props.product.productName}</td>
         <td className='px-6 py-4'>{props.product.productCategory}</td>
-        <td className='px-6 py-4'>{props.product.productSize}</td>
+        <td className='px-6 py-4'>{props.product.description}</td>
+        <img className='object-contain px-6 py-4 w-28 h-28' src={props.product.image} alt='' />
         <td className='px-6 py-4'>{props.product.price}</td>
         <td className='px-6 py-4'>{props.product.discount}</td>
         <td className='px-6 py-4'>{props.product.availability}</td>
@@ -21,18 +21,18 @@ const Product = props => (
             <div class="flex justify-center">
                 <div class="">
                     <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateProduct(props.product._id) }}>
-                        
-                            <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
-                                <div class="">
-                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                    </svg>
-                                </div>
-                                <div class="">
-                                    Edit
-                                </div>
+
+                        <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
+                            <div class="">
+                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                </svg>
                             </div>
-                        
+                            <div class="">
+                                Edit
+                            </div>
+                        </div>
+
                     </button>
                 </div>
                 <div class="">
@@ -63,7 +63,7 @@ export class ProductList extends Component {
         this.state = {
             product: [],
             searchProduct: "",
-            show:false
+            show: false
         };
     }
 
@@ -71,7 +71,7 @@ export class ProductList extends Component {
         this.refreshList();
     }
 
-    refreshList(){
+    refreshList() {
         axios.get('http://localhost:5000/product/')
             .then(response => {
                 this.setState({ product: response.data })
@@ -87,7 +87,7 @@ export class ProductList extends Component {
             show: true
 
         })
-        console.log("LIst id is :" +id);
+        console.log("LIst id is :" + id);
     }
 
     closeModalBox = () => {
@@ -100,7 +100,7 @@ export class ProductList extends Component {
             console.log(response.status)
             // this.refreshTable();
 
-            if(response.status == 200){
+            if (response.status === 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful',
@@ -112,7 +112,7 @@ export class ProductList extends Component {
 
                 this.refreshList();
             }
-            
+
             else {
                 Swal.fire({
                     icon: 'Unsuccess',
@@ -124,14 +124,14 @@ export class ProductList extends Component {
                 })
             }
 
-            
+
         })
 
     }
 
     productList() {
         return this.state.product.map(currentproduct => {
-            return <Product product={currentproduct} gotoUpdateProduct= {this.gotoUpdateProduct} deleteProduct={this.deleteProduct} key={currentproduct._id} />;
+            return <Product product={currentproduct} gotoUpdateProduct={this.gotoUpdateProduct} deleteProduct={this.deleteProduct} key={currentproduct._id} />;
         })
     }
 
@@ -139,24 +139,26 @@ export class ProductList extends Component {
 
         return this.state.product.map((currentproduct) => {
             if (
-                this.state.searchProduct ==
-                currentproduct.productName
+                this.state.searchProduct === currentproduct.productName
             ) {
                 return (
                     <tr>
                         <td className='px-6 py-4'>{currentproduct.productID}</td>
                         <td className='px-6 py-4'>{currentproduct.productName}</td>
                         <td className='px-6 py-4'>{currentproduct.productCategory}</td>
-                        <td className='px-6 py-4'>{currentproduct.productSize}</td>
+                        <td className='px-6 py-4'>{currentproduct.description}</td>
+                        <img className='object-contain px-6 py-4 w-28 h-28' src={currentproduct.image} alt='' />
                         <td className='px-6 py-4'>{currentproduct.price}</td>
                         <td className='px-6 py-4'>{currentproduct.discount}</td>
                         <td className='px-6 py-4'>{currentproduct.availability}</td>
 
-                        <td className='flex justify-center px-6 py-4 '>
-                            {
-                                <div class="">
-                                    <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateProduct(currentproduct._id) }}>
-                                       
+                        <td className=''>
+                            <div class="flex justify-center">
+
+                                {
+                                    <div class="">
+                                        <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateProduct(currentproduct._id) }}>
+
                                             <div class=" grid grid-cols-2 gap-1">
                                                 <div class="">
                                                     <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -167,31 +169,31 @@ export class ProductList extends Component {
                                                     Edit
                                                 </div>
                                             </div>
-                                      
-                                    </button>
-                                </div>
-                            }
-                            {"  "}
-                            {
-                                <div class="">
-                                    <button className='inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-200'
-                                        onClick={() => {
-                                            //Delete the selected record
-                                           this.deleteProduct(currentproduct._id)
-                                        }}>
-                                        <div class=" grid grid-cols-2 gap-1">
-                                            <div class="">
-                                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
+
+                                        </button>
+                                    </div>
+                                }
+                                {"  "}
+                                {
+
+                                    <div class="">
+                                        <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-red-500 rounded-md hover:bg-red-200' onClick={() => { this.deleteProduct(currentproduct._id) }}>
+                                            <div class="grid grid-cols-2 gap-1 hover:text-black">
+                                                <div class="">
+                                                    <svg class="h-5 w-5 mr-2 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    Delete
+                                                </div>
                                             </div>
-                                            <div class="">
-                                                Delete
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                            }
+                                        </button>
+                                    </div>
+
+                                }
+                            </div>
+
                         </td>
                     </tr>
                 );
@@ -200,24 +202,23 @@ export class ProductList extends Component {
     }
 
     exportProduct = () => {
-        console.log( "Export PDF" )
-
-
+        console.log("Export PDF")
         const unit = "pt";
-        const size = "A3"; 
-        const orientation = "landscape"; 
+        const size = "A3";
+        const orientation = "landscape";
         const marginLeft = 40;
-        const doc = new jsPDF( orientation, unit, size );
+        const doc = new jsPDF(orientation, unit, size);
 
         const title = "Product List Report ";
-        const headers = [["Product ID","Product Name","Product Category","Product Size","Price","Discount","Availability"]];
+        const headers = [["Product ID", "Product Name", "Product Category", "Product Description", "Price", "Discount", "Availability"]];
 
         const pro = this.state.product.map(
-            Product=>[
-                Product.product,
+            Product => [
+                Product.productID,
                 Product.productName,
                 Product.productCategory,
-                Product.productSize,
+                Product.description,
+                // Product.image,
                 Product.price,
                 Product.discount,
                 Product.availability
@@ -227,13 +228,13 @@ export class ProductList extends Component {
         let content = {
             startY: 50,
             head: headers,
-            body:pro
+            body: pro
         };
-        doc.setFontSize( 20 );
-        doc.text( title, marginLeft, 40 );
+        doc.setFontSize(20);
+        doc.text(title, marginLeft, 40);
         require('jspdf-autotable');
-        doc.autoTable( content );
-        doc.save( "Product-list.pdf" )
+        doc.autoTable(content);
+        doc.save("Product-list.pdf")
     }
 
 
@@ -257,9 +258,9 @@ export class ProductList extends Component {
                                                     </Link>
                                                 </button>
                                                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => this.exportProduct()}>
-                                                   
-                                                        Download Report Here
-                                                   
+
+                                                    Download Report Here
+
                                                 </button>
                                             </div>
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end">
@@ -286,7 +287,8 @@ export class ProductList extends Component {
                                             <th className="p-2 border-black tbhead ">Product ID</th>
                                             <th className="p-2 tbhead">Product Name</th>
                                             <th className="p-2 tbhead">Product Category</th>
-                                            <th className="p-2 tbhead">Product Size</th>
+                                            <th className="p-2 tbhead">Product Description</th>
+                                            <th className="p-2 tbhead">Product Image</th>
                                             <th className="p-2 tbhead">Price</th>
                                             <th className="p-2 tbhead">Discount</th>
                                             <th className="p-2 tbhead">Availability</th>
@@ -294,22 +296,13 @@ export class ProductList extends Component {
                                         </tr>
                                     </thead>
                                     <tbody >
-                                        {this.state.searchProduct == "" ? this.productList() : this.searchProductList()}
+                                        {this.state.searchProduct === "" ? this.productList() : this.searchProductList()}
                                     </tbody>
                                 </table>
                             </div>
 
                             <div class="">
                                 <Modal show={this.state.show} onHide={this.closeModalBox} centered size={"xl"}>
-                                    <Modal.Header className='px-5 pt-4 border-2 shadow-md bg-gray-50' closeButton>
-                                        <div class="">
-                                            <Modal.Title className='items-center' >
-                                                <p className='font-semibold text-black uppercase '>
-                                                    Edit Product
-                                                </p>
-                                            </Modal.Title>
-                                        </div>
-                                    </Modal.Header >
                                     <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
                                         <EditProduct proId={this.state.id} key={this.state.id} close={this.closeModalBox} />
                                     </Modal.Body>
