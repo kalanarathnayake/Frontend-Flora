@@ -56,6 +56,7 @@ import { GreenHouseList } from './components/greenHouse/greenHouse-list.componen
 import { CreateGreenHouse } from './components/greenHouse/greenHouse-add.component';
 import { SupplierList } from './components/supplier/supplier-list.component';
 import { CreateSupplier } from './components/supplier/supplier-add.component';
+import CusHome from './components/navbar/cus-home.component';
 initTE({ Carousel }, true); // set second parameter to true if you want to use a debugger
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
 
           <Route exact path="/nav" element={Navbar} />
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/cus" element={<CusHome />} />
 
           <Route exact path="/employee" element={<EmployeeList />} />{/* Done */}
           <Route exact path="/creatEmployee" element={<CreateEmployee />} />{/* Done */}
