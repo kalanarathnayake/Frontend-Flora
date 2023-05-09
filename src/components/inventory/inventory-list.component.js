@@ -9,27 +9,25 @@ import EditInventory from './inventory-edit.component'
 
 const Inventory = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-       
         <td className='px-6 py-4'>{props.inventory.productID}</td>
         <td className='px-6 py-4'>{props.inventory.productName}</td>
         <td className='px-6 py-4'>{props.inventory.productCategory}</td>
         <td className='px-6 py-4'>{props.inventory.quantity}</td>
+        <td className='px-6 py-4'>{props.inventory.productDiscription}</td>
         <td className='px-6 py-4'>
             <div class="flex justify-center">
                 <div class="">
                     <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateInventory(props.inventory._id) }}>
-                        
-                            <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
-                                <div class="">
-                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                    </svg>
-                                </div>
-                                <div class="">
-                                    Edit
-                                </div>
+                        <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
+                            <div class="">
+                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                </svg>
                             </div>
-                        
+                            <div class="">
+                                Edit
+                            </div>
+                        </div>
                     </button>
                 </div>
                 <div class="">
@@ -52,33 +50,29 @@ const Inventory = props => (
 )
 
 export class InventoryList extends Component {
-
     constructor(props) {
         super(props);
-
         this.deleteInventory = this.deleteInventory.bind(this);
         this.gotoUpdateInventory = this.gotoUpdateInventory.bind(this);
-
         this.state = {
             inventory: [],
             searchInventory: "",
-            show:false
+            show: false
         };
     }
-
 
     componentDidMount() {
         this.refreshList();
     };
 
-    refreshList(){
+    refreshList() {
         axios.get('http://localhost:5000/inventory/')
-        .then(response => {
-            this.setState({ inventory: response.data })
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then(response => {
+                this.setState({ inventory: response.data })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     gotoUpdateInventory = (id) => {
@@ -87,7 +81,7 @@ export class InventoryList extends Component {
             show: true
 
         })
-        console.log("LIst id is :" +id);
+        console.log("LIst id is :" + id);
     }
 
     //Modal box
@@ -97,12 +91,10 @@ export class InventoryList extends Component {
     }
 
     deleteInventory(id) {
-        
         axios.delete('http://localhost:5000/inventory/' + id).then(response => {
             console.log(response.status)
             // this.refreshTable();
-
-            if(response.status == 200){
+            if (response.status == 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful',
@@ -111,11 +103,8 @@ export class InventoryList extends Component {
                     confirmButtonColor: '#0a5bf2',
                     iconColor: '#60e004'
                 })
-
                 this.refreshList();
-            }
-            
-            else {
+            } else {
                 Swal.fire({
                     icon: 'Unsuccess',
                     title: 'Unsuccessfull',
@@ -125,24 +114,24 @@ export class InventoryList extends Component {
                     iconColor: '#60e004'
                 })
             }
-
-            
         })
-        
-
-}
+    }
 
     inventoryList() {
         return this.state.inventory.map(currentinventory => {
-            return <Inventory inventory={currentinventory} deleteInventory={this.deleteInventory} gotoUpdateInventory={this.gotoUpdateInventory} key={currentinventory._id} />;
+            return <Inventory
+                inventory={currentinventory}
+                deleteInventory={this.deleteInventory}
+                gotoUpdateInventory={this.gotoUpdateInventory}
+                key={currentinventory._id}
+            />;
         })
     }
 
     searchInventoryList() {
         return this.state.inventory.map((currentinventory) => {
             if (
-                this.state.searchInventory ==
-                currentinventory.productID
+                this.state.searchInventory == currentinventory.productID
             ) {
                 return (
                     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
@@ -150,21 +139,21 @@ export class InventoryList extends Component {
                         <td className='px-6 py-4'>{currentinventory.productName}</td>
                         <td className='px-6 py-4'>{currentinventory.productCategory}</td>
                         <td className='px-6 py-4'>{currentinventory.quantity}</td>
+                        <td className='px-6 py-4'>{currentinventory.productDiscription}</td>
                         <td className='flex justify-center px-6 py-4 '>
                             {
                                 <div class="">
                                     <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateInventory(currentinventory._id) }}>
-                                        
-                                            <div class=" grid grid-cols-2 gap-1">
-                                                <div class="">
-                                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                                    </svg>
-                                                </div>
-                                                <div class="">
-                                                    Edit
-                                                </div>
-                                            </div>                                   
+                                        <div class=" grid grid-cols-2 gap-1">
+                                            <div class="">
+                                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="">
+                                                Edit
+                                            </div>
+                                        </div>
                                     </button>
                                 </div>
                             }
@@ -197,41 +186,36 @@ export class InventoryList extends Component {
         });
     }
 
-
     exportInventory = () => {
-        console.log( "Export PDF" )
-
+        console.log("Export PDF")
 
         const unit = "pt";
-        const size = "A3"; 
-        const orientation = "landscape"; 
+        const size = "A3";
+        const orientation = "landscape";
         const marginLeft = 40;
-        const doc = new jsPDF( orientation, unit, size );
-
+        const doc = new jsPDF(orientation, unit, size);
         const title = "Inventory List Report ";
-        const headers = [["Product ID","Product Name","Product Category","Quantity"]];
-
-        const inv = this.state.inventory.map(
-            Inventory=>[
+        const headers = [["Product ID", "Product Name", "Product Category", "Quantity", "Product Discription"]];
+        const inventoryListDetails = this.state.inventory.map(
+            Inventory => [
                 Inventory.productID,
                 Inventory.productName,
                 Inventory.productCategory,
-                Inventory.quantity
+                Inventory.quantity,
+                Inventory.productDiscription
             ]
         );
-
         let content = {
             startY: 50,
             head: headers,
-            body:inv
+            body: inventoryListDetails
         };
-        doc.setFontSize( 20 );
-        doc.text( title, marginLeft, 40 );
+        doc.setFontSize(20);
+        doc.text(title, marginLeft, 40);
         require('jspdf-autotable');
-        doc.autoTable( content );
-        doc.save( "Inventory-list.pdf" )
+        doc.autoTable(content);
+        doc.save("Inventory-list.pdf")
     }
-
 
     render() {
         return (
@@ -252,9 +236,8 @@ export class InventoryList extends Component {
                                                         Add Inventory
                                                     </Link></button>
                                                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => this.exportInventory()}>
-                                                    
-                                                        Download Report Here
-                                                    </button>
+                                                    Download Report Here
+                                                </button>
                                             </div>
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end">
                                                 <input
@@ -281,6 +264,7 @@ export class InventoryList extends Component {
                                             <th className="p-2tbhead">Product Name</th>
                                             <th className="p-2tbhead">productCategory</th>
                                             <th className="p-2tbhead">Quantity</th>
+                                            <th className="p-2tbhead">Product Description</th>
                                             <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>
@@ -312,4 +296,3 @@ export class InventoryList extends Component {
         )
     }
 }
-

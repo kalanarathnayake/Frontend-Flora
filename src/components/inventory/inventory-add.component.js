@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as Swal from "sweetalert2";
 
-
-
 export class CreateInventory extends Component {
     constructor(props) {
         super(props);
@@ -11,13 +9,14 @@ export class CreateInventory extends Component {
         this.onChangeproductName = this.onChangeproductName.bind(this);
         this.onChangeproductCategory = this.onChangeproductCategory.bind(this);
         this.onChangequantity = this.onChangequantity.bind(this);
+        this.onChangeproductDiscription = this.onChangeproductDiscription.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
         this.state = {
             productID: '',
             productName: '',
             productCategory: '',
-            quantity: ''
+            quantity: '',
+            productDiscription: '',
         }
     }
 
@@ -44,59 +43,58 @@ export class CreateInventory extends Component {
             quantity: e.target.value
         });
     }
+    onChangeproductDiscription(e) {
+        this.setState({
+            productDiscription: e.target.value
+        });
+    }
 
     onSubmit(e) {
         e.preventDefault();
-
         const inventory = {
             productID: this.state.productID,
             productName: this.state.productName,
             productCategory: this.state.productCategory,
-            quantity: this.state.quantity
+            quantity: this.state.quantity,
+            productDiscription: this.state.productDiscription
         }
-
         console.log(inventory);
 
-        if(this.state.productID.length < 3){
-            this.setState({proError : "Product Id cannot be shorter than 3 digits."})
-        }
-        else if(this.state.productName.length < 3){
-            this.setState({nameError : "Product Name cannot be shorter than 3 digits."})
-        }
-        else if(this.state.productCategory.length <4){
-            this.setState({categoryError : "Product Category cannot be shorter than 4 digits."})
-        }else if(this.state.quantity == null){
-            this.setState({quantityError : "Quantity can not be zero."})
-        }
-       else{
-        axios.post('http://localhost:5000/inventory/', inventory)
-        
-
-            .then(res => {
-                console.log(res);
-
-                if (res.status === 200) {
-                    this.clearData();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: 'Inventory has been added!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error in adding!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#e00404'
-                    })
-                }
-            })
+        if (this.state.productID.length < 3) {
+            this.setState({ proError: "Product Id cannot be shorter than 3 digits." })
+        } else if (this.state.productName.length < 3) {
+            this.setState({ nameError: "Product Name cannot be shorter than 3 digits." })
+        } else if (this.state.productCategory.length < 4) {
+            this.setState({ categoryError: "Product Category cannot be shorter than 4 digits." })
+        } else if (this.state.quantity == null) {
+            this.setState({ quantityError: "Quantity can not be zero." })
+        } else if (this.state.productDiscription < 10) {
+            this.setState({ productDiscriptionError: "Product Category cannot be shorter than 10 digits." })
+        } else {
+            axios.post('http://localhost:5000/inventory/', inventory)
+                .then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        this.clearData();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successful',
+                            text: 'Inventory has been added!!',
+                            background: '#fff',
+                            confirmButtonColor: '#333533',
+                            iconColor: '#60e004'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error in adding!',
+                            background: '#fff',
+                            confirmButtonColor: '#333533',
+                            iconColor: '#e00404'
+                        })
+                    }
+                })
         }
     }
 
@@ -105,7 +103,8 @@ export class CreateInventory extends Component {
             productID: '',
             productName: '',
             productCategory: '',
-            quantity: ''
+            quantity: '',
+            productDiscription: ''
         })
     }
 
@@ -121,11 +120,13 @@ export class CreateInventory extends Component {
                                         <form className='px-12 py-6' onSubmit={this.onSubmit}>
                                             <div class="">
                                                 <p className='text-4xl font-semibold text-black uppercase drop-shadow-lg'>
-                                                    Add Inventory                                                </p>
+                                                    Add Inventory
+                                                </p>
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                     <div class="">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Product ID                                                        </label>
+                                                            Product ID
+                                                        </label>
                                                         <input
                                                             type="text"
                                                             required
@@ -135,11 +136,11 @@ export class CreateInventory extends Component {
                                                         /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.proError}</p>
                                                     </div>
                                                 </div>
-
                                                 <div className="grid grid-cols-2 gap-4 form-group">
                                                     <div className="form-group">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Product Name                                                        </label>
+                                                            Product Name
+                                                        </label>
                                                         <input type="text"
                                                             required
                                                             className="form-control"
@@ -149,7 +150,8 @@ export class CreateInventory extends Component {
                                                     </div>
                                                     <div class="">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                            Product Category                                                         </label>
+                                                            Product Category
+                                                        </label>
                                                         <input type="text"
                                                             required
                                                             className="form-control"
@@ -161,7 +163,21 @@ export class CreateInventory extends Component {
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                     <div className="form-group">
                                                         <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Quantity                                                    </label>
+                                                            Description
+                                                        </label>
+                                                        <textarea type="text"
+                                                            className="form-control"
+                                                            required
+                                                            value={this.state.productDiscription}
+                                                            onChange={this.onChangeproductDiscription}
+                                                        /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productDiscriptionError}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid grid-cols-1 gap-4 form-group">
+                                                    <div className="form-group">
+                                                        <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                                                            Quantity
+                                                        </label>
                                                         <input type="text"
                                                             className="form-control"
                                                             value={this.state.quantity}
@@ -174,21 +190,13 @@ export class CreateInventory extends Component {
                                                 </div>
                                             </div>
                                         </form>
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
-
-
-
         )
     }
 }
