@@ -11,11 +11,10 @@ export class CreateProduct extends Component {
         this.onChangeproductCategory = this.onChangeproductCategory.bind(this);
         this.onChangedescription = this.onChangedescription.bind(this);
         this.onChangeimage = this.onChangeimage.bind(this);
-        this.onChangeproductSize = this.onChangeproductSize.bind(this);
         this.onChangeprice = this.onChangeprice.bind(this);
         this.onChangediscount = this.onChangediscount.bind(this);
         this.onChangeavailability = this.onChangeavailability.bind(this);
-        // this.uploadImage = this.uploadImage.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             productID: '',
@@ -29,11 +28,59 @@ export class CreateProduct extends Component {
         }
     }
 
+    onChangeproductID(e) {
+        this.setState({
+            productID: e.target.value
+        });
+    }
+
+    onChangeproductName(e) {
+        this.setState({
+            productName: e.target.value
+        });
+    }
+
+    onChangeproductCategory(e) {
+        this.setState({
+            productCategory: e.target.value
+        });
+    }
+
+    onChangedescription(e) {
+        this.setState({
+            description: e.target.value
+        });
+    }
+
+    onChangeimage(e) {
+        this.setState({
+            image: e.target.value
+        });
+    }
+
+    onChangeprice(e) {
+        this.setState({
+            price: e.target.value
+        });
+    }
+
+    onChangediscount(e) {
+        this.setState({
+            discount: e.target.value
+        });
+    }
+
+    onChangeavailability(e) {
+        this.setState({
+            availability: e.target.value
+        });
+    }
+
     uploadImage = (e) => {
         if (e.target.files[0] !== null) {
             const fileName = e.target.files[0].name + "-" + new Date();
             const uploadTask = storage
-                .ref(`Products/${fileName}`)
+                .ref(`digitalbook/${fileName}`)
                 .put(e.target.files[0]);
             uploadTask.on(
                 "state_changed",
@@ -70,54 +117,6 @@ export class CreateProduct extends Component {
         }
     };
 
-    onChangeproductID(e) {
-        this.setState({
-            productID: e.target.value
-        });
-    }
-
-    onChangeproductName(e) {
-        this.setState({
-            productName: e.target.value
-        });
-    }
-
-    onChangeproductCategory(e) {
-        this.setState({
-            productCategory: e.target.value
-        });
-    }
-
-    onChangedescription(e) {
-        this.setState({
-            description: e.target.value
-        });
-    }
-
-    // onChangeimage(e) {
-    //     this.setState({
-    //         image: e.target.value
-    //     });
-    // }
-
-    onChangeprice(e) {
-        this.setState({
-            price: e.target.value
-        });
-    }
-
-    onChangediscount(e) {
-        this.setState({
-            discount: e.target.value
-        });
-    }
-
-    onChangeavailability(e) {
-        this.setState({
-            availability: e.target.value
-        });
-    }
-
     // productID: '',
     // productName: '',
     // productCategory: '',
@@ -136,7 +135,6 @@ export class CreateProduct extends Component {
             productCategory: this.state.productCategory,
             description: this.state.description,
             image: this.state.image,
-            productSize: this.state.productSize,
             price: this.state.price,
             discount: this.state.discount,
             availability: this.state.availability
@@ -146,17 +144,12 @@ export class CreateProduct extends Component {
 
         if (this.state.productName.length < 3) {
             this.setState({ nameError: "Product Name should be longer than 3 characters." })
-        }
-        else if (this.state.productCategory.length < 3) {
+        } else if (this.state.productCategory.length < 3) {
             this.setState({ productCategoryError: "Invalid Product Category" })
-        }
-        else if (this.state.productSize.length < 3) {
-            this.setState({ productSizeError: "Invalid Product Size" })
         }
         else if (this.state.price < 500) {
             this.setState({ priceError: "Price cannot be lesser than 500" })
         } else {
-
             axios.post('http://localhost:5000/product/', product)
                 .then(res => {
                     console.log(res);
@@ -189,9 +182,10 @@ export class CreateProduct extends Component {
             productID: '',
             productName: '',
             productCategory: '',
-            productSize: '',
+            description: '',
+            image: '',
             price: '',
-            discount: '',
+            discount: 0,
             availability: ''
         })
     }
@@ -208,6 +202,15 @@ export class CreateProduct extends Component {
                                         <p className='text-4xl font-semibold text-black uppercase'>
                                             Add Product
                                         </p>
+                                        <div className="form-group">
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product ID</label>
+                                            <input type="text"
+                                                required
+                                                className="form-control"
+                                                value={this.state.productID}
+                                                onChange={this.onChangeproductID}
+                                            />
+                                        </div>
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Name</label>
                                             <input type="text"
@@ -232,18 +235,13 @@ export class CreateProduct extends Component {
                                             </select><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productCategoryError}</p>
                                         </div>
                                         <div className="form-group">
-                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Size</label>
-                                            <select type="text"
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Description</label>
+                                            <input type="text"
+                                                required
                                                 className="form-control"
-                                                value={this.state.productSize}
-                                                onChange={this.onChangeproductSize}
-                                            >
-                                                <option>Select From Here</option>
-                                                <option>Small</option>
-                                                <option>Medium</option>
-                                                <option>Large</option>
-                                            </select>
-                                            <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productSizeError}</p>
+                                                value={this.state.description}
+                                                onChange={this.onChangedescription}
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Price (LKR)</label>
@@ -282,6 +280,8 @@ export class CreateProduct extends Component {
                                                 for="file_input">
                                                 Upload Image
                                             </label>
+                                            {this.image && <img src={this.image} alt='' />}
+
                                             <input
                                                 className="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer text-xxl bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                 id="file_input"
