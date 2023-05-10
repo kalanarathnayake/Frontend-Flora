@@ -9,14 +9,56 @@ export class UserRegistration extends Component {
         this.onChangeuserRole = this.onChangeuserRole.bind(this);
         this.onChangepassword = this.onChangepassword.bind(this);
         this.onChangecpassword = this.onChangecpassword.bind(this);
+        this.onChangeFullName = this.onChangeFullName.bind(this);
+        this.onChangeDob = this.onChangeDob.bind(this);
+       
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeContactNo = this.onChangeContactNo.bind(this);
+        this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            fullName: '',
+            dob: new Date(),
+          
+            email: '',
+            contactNo: '',
+            address: '',
             NIC: '',
             userRole: '',
             password: '',
             cpassword: ''
         }
+    }
+
+    onChangeFullName(e) {
+        this.setState({
+            fullName: e.target.value
+        });
+    }
+
+    onChangeDob(date) {
+        this.setState({
+            dob: date
+        });
+    }
+
+    onChangeEmail(e) {
+        this.setState({
+            email: e.target.value
+        });
+    }
+
+    onChangeContactNo(e) {
+        this.setState({
+            contactNo: e.target.value
+        });
+    }
+
+    onChangeAddress(e) {
+        this.setState({
+            address: e.target.value
+        });
     }
 
     onChangeNIC(e) {
@@ -46,6 +88,12 @@ export class UserRegistration extends Component {
     onSubmit(e) {
         e.preventDefault();
 
+        const user = {
+            NIC: this.state.NIC,
+            userRole: this.state.userRole,
+            password: this.state.password
+        }
+
         if (this.state.NIC.length < 10 || this.state.NIC.length > 12) {
 
             this.setState({ nicError: "Please enter a valid NIC" })
@@ -58,15 +106,9 @@ export class UserRegistration extends Component {
 
         else {
 
-            const user = {
-                NIC: this.state.NIC,
-                userRole: this.state.userRole,
-                password: this.state.password
-            }
-
             console.log(user);
 
-            axios.post('http://localhost:5000/user/', user)
+            axios.post('http://localhost:5000/customer/', user)
 
                 .then(res => {
 
@@ -104,100 +146,21 @@ export class UserRegistration extends Component {
 
     clearData = () => {
         this.setState({
+            fullName: '',
+            dob: new Date(),
+            email: '',
+            contactNo: '',
+            address: '',
             NIC: '',
             userRole: '',
             password: '',
-            cpassword: '',
+            cpassword: ''
         })
     }
 
     render() {
         return (
             <div className="flex flex-col px-5 pt-2 ">
-                {/* <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                        <div className='items-center overflow-hidden'>
-                            <div class="grid grid-cols-1 gap-4 content-start pt-5 px-20">
-
-                                <form className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50' onSubmit={this.onSubmit}>
-
-                                    <div class="">
-                                        <p className='text-4xl font-semibold text-black uppercase'>
-                                            Sign Up
-                                        </p>
-
-                                        <div className="form-group">
-                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>NIC </label>
-                                            <input type="text"
-                                                required
-                                                className="form-control "
-                                                value={this.state.NIC}
-                                                onChange={this.onChangeNIC}
-                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nicError}</p>
-                                        </div>
-
-                                        <div className="form-group">
-                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>User Role </label>
-                                            <select type="text"
-                                                required
-                                                className="form-control"
-                                                value={this.state.userRole}
-                                                onChange={this.onChangeuserRole}
-                                            >
-                                                <option>Select From Here</option>
-                                                <option>Employee Manager</option>
-                                                <option>Customer Manager</option>
-                                                <option>Inventory Manager</option>
-                                                <option>Delivery Manager</option>
-                                                <option>Product Manager</option>
-                                                <option>Order Manager</option>
-                                                <option>Finance Manager</option>
-                                                <option>Green House Manager</option>
-                                                <option>Supplier Manager</option>
-                                                <option>Customer</option>
-
-                                            </select>
-
-
-                                            <p />
-                                        </div>
-
-                                        <div className="grid grid-cols-2 gap-4 form-group">
-                                            <div className="form-group">
-                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Password </label>
-                                                <input type="password"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.password}
-                                                    onChange={this.onChangepassword}
-                                                /><p />
-                                            </div>
-
-
-                                            <div className="form-group">
-                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Confirm Password </label>
-                                                <input type="password"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.cpassword}
-                                                    onChange={this.onChangecpassword}
-                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.passwordError}</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="text-center align-middle form-group">
-                                            <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Sign Up" />
-                                        </div>
-                                    </div>
-
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-
-
 
                 <div class="gradient-form h-full dark:bg-neutral-700">
                     <div class="mb-20 container h-full p-10">
@@ -210,10 +173,7 @@ export class UserRegistration extends Component {
                                         <div class="px-4 md:px-0 lg:w-6/12">
                                             <div class="md:mx-6 md:p-12">
                                                 <div class="text-center">
-                                                    {/* <img
-                                                        class="mx-auto w-36"
-                                                        src="https://www.transcielos.com/wp-content/uploads/2018/08/Jetwing-travels.png"
-                                                        alt="logo" /> */}
+                                                   
                                                     <h4 class="mb-12 mt-1 pb-1 text-xl font-bold drop-shadow-lg uppercase">
                                                         We are The <span class="text-pink-600 text-2xl font-serif shadow-white drop-shadow-lg">Sonduruma Mal</span> Team
                                                     </h4>

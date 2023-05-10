@@ -66,7 +66,7 @@ export class CreateSupplier extends Component {
             contactNo: this.state.contactNo,
             email: this.state.email,
             address: this.state.address,
-            position: this.state.position
+          
         }
 
         //check payload

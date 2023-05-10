@@ -138,17 +138,6 @@ export class UserLogin extends Component {
                     }
 
                 }
-                // else {
-
-                //     Swal.fire({
-                //         icon: 'error',
-                //         title: 'Error',
-                //         text: 'Invalid Credentials',
-                //         background: '#fff',
-                //         confirmButtonColor: '#333533',
-                //         iconColor: '#60e004'
-                //     })
-                // }
 
 
             });
@@ -171,56 +160,7 @@ export class UserLogin extends Component {
     render() {
         return (
             <div className="flex flex-col px-5 pt-2 ">
-                {/* <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                        <div className='items-center overflow-hidden'>
-                            <div class="grid grid-cols-1 gap-4 content-start pt-5 px-20">
-
-                                <form className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50' onSubmit={this.onSubmit}>
-
-                                    <div class="">
-                                        <p className='text-4xl font-semibold text-black uppercase'>
-                                            Sign In
-                                        </p>
-
-                                        <div className="form-group">
-                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>NIC </label>
-                                            <input type="text"
-                                                required
-                                                className="form-control "
-                                                value={this.state.NIC}
-                                                onChange={this.onChangeNIC}
-                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nicError}</p>
-                                        </div>
-
-
-
-                                        <div className="form-group">
-                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Password </label>
-                                            <input type="password"
-                                                required
-                                                className="form-control"
-                                                value={this.state.password}
-                                                onChange={this.onChangepassword}
-                                            /><p />
-
-
-
-                                        </div>
-
-                                        <div className="text-center align-middle form-group">
-                                            <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Sign In" />
-                                        </div>
-                                    </div>
-
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-
-
+               
 
 
                 <div class="">

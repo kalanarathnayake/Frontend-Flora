@@ -269,7 +269,7 @@ export class GreenHouseList extends Component {
                                             <th className="p-2 tbhead">Contact Number</th>
                                             <th className="p-2 tbhead">Email</th>
                                             <th className="p-2 tbhead">Address</th>
-                                            <th className="p-2 tbhead">Position</th>
+                                           
                                             <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>

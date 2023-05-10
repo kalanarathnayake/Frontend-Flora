@@ -12,6 +12,7 @@ export class EditDelivery extends Component {
 
         this.onChangecustomer = this.onChangecustomer.bind(this);
         this.onChangeassignedEmp = this.onChangeassignedEmp.bind(this);
+        this.onChangeOrderStatus = this.onChangeOrderStatus.bind(this);
         
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -41,6 +42,12 @@ export class EditDelivery extends Component {
     onChangeassignedEmp(e){
         this.setState({
             assignedEmp : e.target.value
+        });
+    }
+
+    onChangeOrderStatus(e){
+        this.setState({
+            orderStatus : e.target.value
         });
     }
 
@@ -235,7 +242,7 @@ this.refreshList();
                                                         Status                                                    </label>
                                                     <input type="text"
                                                         className="form-control"
-                                                        disabled
+                                                        onChange={this.onChangeOrderStatus}
                                                         value={this.state.orderStatus}
                                                         
                                                     />
