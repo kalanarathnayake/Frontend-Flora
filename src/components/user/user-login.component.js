@@ -66,7 +66,7 @@ export class UserLogin extends Component {
 
                 AuthenticationService.successfulLogin(currentuser.NIC, currentuser.userRole)
                 console.log(currentuser.NIC, currentuser.userRole)
-               
+
                 window.location = "/nav"
 
             }
@@ -109,7 +109,7 @@ export class UserLogin extends Component {
                     if (isUserLoggedIn === true && currentuser.userRole == "Employee Manager") {
                         window.location = "/nav"
                         window.location = "/employee"
-                    }else if (isUserLoggedIn === true && currentuser.userRole == "Customer") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Customer") {
                         window.location = "/nav"
                         window.location = "/cus"
                     }
@@ -128,16 +128,16 @@ export class UserLogin extends Component {
                     }
                     else if (isUserLoggedIn === true && currentuser.userRole == "Green House Manager") {
                         window.location = "/greenHouse"
-                    }else if (isUserLoggedIn === true && currentuser.userRole == "Supplier Manager") {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Supplier Manager") {
                         window.location = "/supplier"
                     } else if (isUserLoggedIn === true && currentuser.userRole == "Order Manager") {
                         window.location = "/order"
-                    }else if (isUserLoggedIn === false) {
+                    } else if (isUserLoggedIn === false) {
                         window.location = "/nav"
                         window.location = "/"
                     }
 
-                } 
+                }
                 // else {
 
                 //     Swal.fire({
@@ -153,7 +153,7 @@ export class UserLogin extends Component {
 
             });
 
-            
+
 
         }
 
@@ -171,7 +171,7 @@ export class UserLogin extends Component {
     render() {
         return (
             <div className="flex flex-col px-5 pt-2 ">
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                {/* <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className='items-center overflow-hidden'>
                             <div class="grid grid-cols-1 gap-4 content-start pt-5 px-20">
@@ -217,6 +217,67 @@ export class UserLogin extends Component {
 
                             </div>
                         </div>
+                    </div>
+                </div> */}
+
+
+
+
+                <div class="">
+
+                    <div class="container my-44 px-6 mx-auto">
+                        <section class="mb-32 text-gray-800 background-radial-gradient">
+                            <div class="px-6 py-12 md:px-12 text-center lg:text-left bg-gradient-to-r rounded-lg from-indigo-900 from-10% via-sky-600 via-30% to-pink-700 to-90%">
+                                <div class="container mx-auto xl:px-32">
+                                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                                        <div class="mt-12 lg:mt-0">
+                                            <h1
+                                                class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12"
+                                                style={{ color: "hsl(218, 81%, 95%)" }}
+                                            >
+                                                Ayuobowan <br /></h1>
+                                            <h2><span style={{ color: "hsl(218, 81%, 75%)" }}>Welcome To </span><span class="text-pink-600 font-extrabold drop-shadow-xl font-serif">Sonduruma Mal Store</span>
+                                            </h2>
+                                            <p class="mb-4 opacity-90 lead text-stone-50 font-bold uppercase" >
+                                                SUSTAINABLE Decoration IS AT OUR CORE
+                                            </p>
+                                        </div>
+                                        <div class="mb-12 lg:mb-0">
+                                            <div class="block rounded-lg shadow-lg bg-white px-6 py-12 md:px-12">
+                                                <h2 class="text-3xl font-bold mb-12">Sign In with <span class="text-indigo-900">US</span></h2>
+                                                <form className='' onSubmit={this.onSubmit}>
+                                                    <div class="">
+                                                        <div className="form-group">
+                                                            <input type="text"
+                                                                required
+                                                                placeholder="NIC"
+                                                                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                                                value={this.state.NIC}
+                                                                onChange={this.onChangeNIC}
+                                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nicError}</p>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <input type="password"
+                                                                required
+                                                                placeholder="Password"
+                                                                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                                                value={this.state.password}
+                                                                onChange={this.onChangepassword}
+                                                            /><p />
+                                                        </div>
+                                                        <div className="text-center align-middle form-group">
+                                                            <input
+                                                                class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                                type="submit" value="Sign In" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
