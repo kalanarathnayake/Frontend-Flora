@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as Swal from "sweetalert2";
 import { Modal } from "react-bootstrap";
-import CreatePayment from './payment-add.component';
+import AuthenticationService from '../user/AuthenticationService';
 
 
 
@@ -10,40 +10,33 @@ export class CreateOrder extends Component {
     constructor(props) {
         super(props);
         this.onChangecustomer = this.onChangecustomer.bind(this);
-        this.onChangeitem1 = this.onChangeitem1.bind(this);
-        this.onChangequantity1 = this.onChangequantity1.bind(this);
-        this.onChangeitem2 = this.onChangeitem2.bind(this);
-        this.onChangequantity2 = this.onChangequantity2.bind(this);
-        this.onChangeitem3 = this.onChangeitem3.bind(this);
-        this.onChangequantity3 = this.onChangequantity3.bind(this);
+        this.onChangequantity = this.onChangequantity.bind(this);
         this.onChangeorderFor = this.onChangeorderFor.bind(this);
         this.onChangedeliveryAddress = this.onChangedeliveryAddress.bind(this);
         this.onChangeamount = this.onChangeamount.bind(this);
-        this.onChangesize1 = this.onChangesize1.bind(this);
-        this.onChangesize2 = this.onChangesize2.bind(this);
-        this.onChangesize3 = this.onChangesize3.bind(this);
-        // this.onChangeorderStatus = this.onChangeorderStatus.bind(this);
+        this.onChangeCardNumber = this.onChangeCardNumber.bind(this);
+        this.onChangeBankName = this.onChangeBankName.bind(this);
+        this.onChangeAccName = this.onChangeAccName.bind(this);
+        this.onChangeCVCNum = this.onChangeCVCNum.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.getPrice1 = this.getPrice1.bind(this);
 
         this.state = {
+            id: props.proId,
             products: [],
             customer: '',
-            item1: '',
-            size1:'',
-            quantity1: '',
-            item2: '',
-            size2:'',
-            quantity2: '',
-            item3: '',
-            size3:'',
-            quantity3: '',
+            productName: '',
+            productCategory: '',
+            quantity: '',
             orderFor: '',
             deliveryAddress: '',
-            amount: '',
+            amount: 0,
             orderStatus: '',
-            price: '',
-            show:false
+            price: 0,
+            show: false,
+            cardNum: '',
+            bankName: '',
+            accName: '',
+            cvcNum: '',
 
         }
     }
@@ -54,57 +47,9 @@ export class CreateOrder extends Component {
         });
     }
 
-    onChangeitem1(e) {
+    onChangequantity(e) {
         this.setState({
-            item1: e.target.value
-        });
-    }
-
-    onChangesize1(e) {
-        this.setState({
-            size1: e.target.value
-        });
-    }
-
-    onChangesize2(e) {
-        this.setState({
-            size2: e.target.value
-        });
-    }
-
-    onChangesize3(e) {
-        this.setState({
-            size3: e.target.value
-        });
-    }
-
-    onChangequantity1(e) {
-        this.setState({
-            quantity1: e.target.value
-        });
-    }
-
-    onChangeitem2(e) {
-        this.setState({
-            item2: e.target.value
-        });
-    }
-
-    onChangequantity2(e) {
-        this.setState({
-            quantity2: e.target.value
-        });
-    }
-
-    onChangeitem3(e) {
-        this.setState({
-            item3: e.target.value
-        });
-    }
-
-    onChangequantity3(e) {
-        this.setState({
-            quantity3: e.target.value
+            quantity: e.target.value
         });
     }
 
@@ -125,282 +70,103 @@ export class CreateOrder extends Component {
             amount: e.target.value
         });
     }
+    onChangeCardNumber(e) {
+        this.setState({
+            cardNum: e.target.value
+        });
+    }
+
+    onChangeBankName(e) {
+        this.setState({
+            bankName: e.target.value
+        });
+    }
+
+    onChangeAccName(e) {
+        this.setState({
+            accName: e.target.value
+        });
+    }
+
+    onChangeCVCNum(e) {
+        this.setState({
+            cvcNum: e.target.value
+        });
+    }
 
     componentDidMount() {
+
         this.getProduct();
     }
 
     getProduct() {
-        axios.get('http://localhost:5000/product/')
+        axios.get('http://localhost:5000/product/' + this.state.id)
             .then(response => {
-                this.setState({ products: response.data })
+                this.setState({
+                    id: response.data._id,
+                    productID: response.data.productID,
+                    productName: response.data.productName,
+                    productCategory: response.data.productCategory,
+                    description: response.data.description,
+                    image: response.data.image,
+                    price: response.data.price,
+                    discount: response.data.discount,
+                    availability: response.data.availability,
+
+                })
             })
-            .catch((error) => {
+            .catch(function (error) {
                 console.log(error);
             })
-    }
-    getPrice3(item3, size3, quantity3) {
-
-        console.log(item3)
-
-        // const item1 = this.state.item1;
-        // const quantity1 = this.state.quantity1;
-        // const item2 = this.state.item2;
-        // const quantity2 = this.state.quantity2;
-        // const item3 = this.state.item3;
-        // const quantity3 = this.state.quantity3;
-        let amount3 = 0;
-        let i = 1;
-
-       
-
-        // for (let i = 1; i <= 3; i++) {
-            this.state.products.map((currentProduct) => {
-
-                if(item3 == currentProduct.productName && currentProduct.availability == "No"){
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Error',
-                        text: 'Item is not available!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-
-                }else{
-                
-                // let quantity = quantity[i];
-
-                if (item3 == currentProduct.productName && size3 == currentProduct.productSize) {
-                    console.log("Product Name inside getproduct is " + currentProduct.productName)
-
-                    
-                    if(currentProduct.discount > 0){
-                        amount3 = (currentProduct.price * quantity3) - currentProduct.discount
-
-                    }else{
-                    amount3 = currentProduct.price * quantity3
-                    }
-                  
-
-                }
-                // return amount;
-                
-                // console.log("Amount is" + amount);
-
-            }
-
-            })
-            return amount3;
-            // console.log("Amount  154 is" + amount);
-
-        // }
-        
 
     }
-
-    getPrice2(item2, size2, quantity2) {
-
-        console.log(item2)
-
-        // const item1 = this.state.item1;
-        // const quantity1 = this.state.quantity1;
-        // const item2 = this.state.item2;
-        // const quantity2 = this.state.quantity2;
-        // const item3 = this.state.item3;
-        // const quantity3 = this.state.quantity3;
-        let amount2 = 0;
-        let i = 1;
-
-       
-
-        // for (let i = 1; i <= 3; i++) {
-            this.state.products.map((currentProduct) => {
-
-                if(item2 == currentProduct.productName && currentProduct.availability == "No"){
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Error',
-                        text: 'Item is not available!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-
-                }else{
-                
-                // let quantity = quantity[i];
-
-                if (item2 == currentProduct.productName && size2 == currentProduct.productSize) {
-                    console.log("Product Name inside getproduct is " + currentProduct.productName)
-
-                    if(currentProduct.discount > 0){
-                        amount2 = (currentProduct.price * quantity2) - currentProduct.discount
-
-                    }else{
-
-                    amount2 = currentProduct.price * quantity2
-
-                    }
-
-                }
-                // return amount;
-                
-                // console.log("Amount is" + amount);
-
-            }
-
-            })
-            return amount2;
-            // console.log("Amount  154 is" + amount);
-
-        // }
-        
-
-    }
-
-    getPrice1(item1, size1,quantity1) {
-
-        console.log(item1)
-
-        // const item1 = this.state.item1;
-        // const quantity1 = this.state.quantity1;
-        // const item2 = this.state.item2;
-        // const quantity2 = this.state.quantity2;
-        // const item3 = this.state.item3;
-        // const quantity3 = this.state.quantity3;
-        let amount1 = 0;
-        let i = 1;
-
-
-        // for (let i = 1; i <= 3; i++) {
-            this.state.products.map((currentProduct) => {
-
-                if(item1 == currentProduct.productName && currentProduct.availability == "No"){
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Error',
-                        text: 'Item is not available!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
-
-                }else{
-                // let quantity = quantity[i];
-
-                if (item1 == currentProduct.productName && size1 == currentProduct.productSize) {
-                    console.log("Product Name inside getproduct is " + currentProduct.productName)
-
-
-                    if(currentProduct.discount > 0){
-                        amount1 = (currentProduct.price * quantity1) - currentProduct.discount
-
-                    }else{
-                        amount1 = currentProduct.price * quantity1
-                    }
-
-                    
-
-                    
-
-                  
-
-                }
-            }
-                // return amount;
-                
-                // console.log("Amount is" + amount);
-
-
-
-            })
-            return amount1;
-            // console.log("Amount  154 is" + amount);
-
-        // }
-        
-
-    }
+    
 
     gotoPayment = (id) => {
         this.setState({
             id: id,
-           
+
             show: true
 
         })
-        console.log("LIst id is :" +id);
+        console.log("LIst id is :" + id);
     }
 
     closeModalBox = () => {
         this.setState({ show: false })
-       
+
     }
 
-    
+    calculatePrice( quantity, price) {
+        let finalAmount = quantity * price
+        console.log("Final Price is"+finalAmount)
+        return finalAmount;
+    }
 
 
     onSubmit(e) {
 
-        const item1 = this.state.item1;
-        const size1 = this.state.size1;
-        const quantity1 = this.state.quantity1;
-        const item2 = this.state.item2;
-        const size2 = this.state.size2;
-        const quantity2 = this.state.quantity2;
-        const item3 = this.state.item3;
-        const size3 = this.state.size3;
-        const quantity3 = this.state.quantity3;
-
-        let price1 = this.getPrice1(item1,size1,quantity1);
-        console.log("Price 1 is"+price1);
-
-        let price2 = this.getPrice2(item2,size2,quantity2);
-        console.log("Price 2 is"+price2);
-
-        let price3 = this.getPrice2(item3,size3,quantity3);
-        console.log("Price 3 is"+price3);
-
-        let amount = price1 + price2 + price3;
-        console.log("Amount is"+amount);
-
         e.preventDefault();
 
-
-        const product = [];
-
-
         const order = {
-            customer: this.state.customer,
-            item1: this.state.item1,
-            size1: this.state.size1,
-            quantity1: this.state.quantity1,
-            item2: this.state.item2,
-            size2: this.state.size2,
-            quantity2: this.state.quantity2,
-            item3: this.state.item3,
-            size3: this.state.size3,
-            quantity3: this.state.quantity3,
+            customer: AuthenticationService.loggedUserId(),
+            item: this.state.productName,
+          
+            quantity: this.state.quantity,
+           
             orderFor: this.state.orderFor,
             deliveryAddress: this.state.deliveryAddress,
-            amount: amount,
+            amount: this.calculatePrice(this.state.quantity, this.state.price),
             orderStatus: 'Order Taken',
+            paymentStatus: "Paid",
+            bankName: this.state.bankName,
+            accName: this.state.accName
         }
-
 
         console.log(order);
 
-        if (this.state.customer.length < 6) {
-            this.setState({ cusError: "Customer name is too short." })
-        }
-        else if (this.state.item1.length < 3) {
-            this.setState({ item1Error: "Item name is too short." })
-        }
-        else if (this.state.quantity1 <= 0) {
-            this.setState({ quantity1Error: "Invalid Quantity." })
-        } else if (this.state.orderFor.length < 5) {
-            this.setState({ orderForError: "Order For is too short." })
+       if (this.state.quantity <= 0) {
+            this.setState({ quantityError: "Invalid Quantity." })
         }
         else {
             axios.post('http://localhost:5000/order/', order)
@@ -421,8 +187,6 @@ export class CreateOrder extends Component {
                             iconColor: '#60e004'
                         })
 
-                        this.gotoPayment(id);
-                        // window.location = '/payment';
 
                     } else {
                         Swal.fire({
@@ -436,9 +200,6 @@ export class CreateOrder extends Component {
                     }
                 })
 
-
-               
-
         }
 
     }
@@ -446,18 +207,17 @@ export class CreateOrder extends Component {
     clearData = () => {
         this.setState({
             customer: '',
-            item1: '',
-            size1:'',
-            quantity1: '',
-            item2: '',
-            size2:'',
-            quantity2: '',
-            item3: '',
-            size3:'',
-            quantity3: '',
+            productName: '',
+            productCategory: '',
+            quantity: '',
+            price:'',
             orderFor: '',
             deliveryAddress: '',
             amount: '',
+            cardNum: '',
+            bankName: '',
+            accName: '',
+            cvcNum: '',
 
         })
     }
@@ -475,135 +235,80 @@ export class CreateOrder extends Component {
                                             <p className='text-4xl font-semibold text-black uppercase drop-shadow-lg'>
                                                 Add Order
                                             </p>
-                                            <div className="grid grid-cols-1 gap-4 form-group">
-                                                <div class="">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Customer
-                                                    </label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.customer}
-                                                        onChange={this.onChangecustomer}
-                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.cusError}</p>
-                                                </div>
-
-                                            </div>
 
                                             <div className="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Item 1
+                                                        Product Name
                                                     </label>
                                                     <input type="text"
                                                         required
                                                         className="form-control"
-                                                        value={this.state.item1}
-                                                        onChange={this.onChangeitem1}
-                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.item1Error}</p>
-                                                </div>
-                                                <div class="">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                        Size 1
-                                                    </label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.size1}
-                                                        onChange={this.onChangesize1}
+                                                        value={this.state.productName}
+                                                        readOnly
                                                     />
+                                                  
                                                 </div>
-                                                <div class="">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                        Quantity 1
-                                                    </label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.quantity1}
-                                                        onChange={this.onChangequantity1}
-                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.quantity1Error}</p>
-                                                </div>
-                                            </div>
-                                            <div className="grid grid-cols-2 gap-4 form-group">
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Item 2
-                                                    </label>
-                                                    <input type="text"
-                                                        className="form-control"
-                                                        value={this.state.item2}
-                                                        onChange={this.onChangeitem2}
-                                                    />
-                                                </div>
-                                                <div class="">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                    Size 2
-                                                    </label>
-                                                    <input type="text"
-                                                        
-                                                        className="form-control"
-                                                        value={this.state.size2}
-                                                        onChange={this.onChangesize2}
-                                                    />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Quantity 2
-                                                    </label>
-                                                    <input type="text"
-                                                        className="form-control"
-                                                        value={this.state.quantity2}
-                                                        onChange={this.onChangequantity2}
-                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.quantity2Error}</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="grid grid-cols-2 gap-4 form-group">
 
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Item 3
+                                                        Product Category
                                                     </label>
                                                     <input type="text"
+                                                        required
                                                         className="form-control"
-                                                        value={this.state.item3}
-                                                        onChange={this.onChangeitem3}
+                                                        value={this.state.productCategory}
+                                                        readOnly
                                                     />
+                                                   
                                                 </div>
-                                                <div class="">
+                                                </div>
+                                                <div className="grid grid-cols-2 gap-4 form-group">
+                                                <div class="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                        Size 3
+                                                        Price
                                                     </label>
                                                     <input type="text"
-                                                        
+                                                        required
                                                         className="form-control"
-                                                        value={this.state.size3}
-                                                        onChange={this.onChangesize3}
+                                                        value={this.state.price}
+                                                    
                                                     />
+                                                   
                                                 </div>
-                                                <div className="form-group">
-                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Quantity 3
+                                                <div class="form-group">
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
+                                                        Quantity
                                                     </label>
                                                     <input type="text"
+                                                        required
                                                         className="form-control"
-                                                        value={this.state.quantity3}
-                                                        onChange={this.onChangequantity3}
-                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.quantity3Error}</p>
+                                                        value={this.state.quantity}
+                                                        onChange={this.onChangequantity}
+                                                    /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.quantityError}</p>
                                                 </div>
+                                         
+
+                                           
                                             </div>
+
 
                                             <div className="form-group">
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
                                                     Order For
                                                 </label>
-                                                <input type="text"
+                                                <select type="text"
                                                     required
                                                     className="form-control"
                                                     value={this.state.orderFor}
                                                     onChange={this.onChangeorderFor}
-                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.orderForError}</p>
+                                                >
+                                                    <option>Select From Here</option>
+                                                    <option>Pick Up</option>
+                                                    <option>Delivery</option>
+                                                    
+                                                    </select>
+                                                   
                                             </div>
                                             <div className="form-group">
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
@@ -614,19 +319,77 @@ export class CreateOrder extends Component {
                                                     className="form-control"
                                                     value={this.state.deliveryAddress}
                                                     onChange={this.onChangedeliveryAddress}
-                                                /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.deliveryAddressError}</p>
+                                                />
+                                               
                                             </div>
-                                            {/* <div className="form-group">
+                                            <div>
+                                        <h3 class="pb-4">Payment Details</h3>
+                                    </div>
+                                            <div className="form-group">
                                                 <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                    Amount
+                                                    Final Price
                                                 </label>
-                                                <input type="number"
+                                                <input type="text"
                                                     required
                                                     className="form-control"
-                                                    value={this.state.amount}
-                                                    onChange={this.onChangeamount}
+                                                  
+                                                    value={this.calculatePrice(this.state.quantity, this.state.price)}
                                                 />
-                                            </div> */}
+                                            </div>
+                                            <p/>
+                                            <div className="grid grid-cols-2 gap-4 form-group">
+                                        <div className="form-group">
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Bank Name</label>
+                                            <select type="text"
+                                                required
+                                                className="form-control"
+                                                value={this.state.bankName}
+                                                onChange={this.onChangeBankName}
+                                            >
+                                                <option>Select From Here</option>
+                                                <option>Bank Of Ceylon</option>
+                                                <option>Nations Trust Bank</option>
+                                                <option>Hatton National Bank</option>
+                                                <option>Sampath Bank</option>
+                                                <option>Commercial Bank</option>
+                                                <option>National Savings Bank</option>
+                                                <option>Amanaa Bank</option>
+                                            </select>
+                                            <p />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Account Name</label>
+                                            <input type="text"
+                                                required
+                                                className="form-control"
+                                                value={this.state.accName}
+                                                onChange={this.onChangeAccName}
+                                            />
+                                            <p />
+                                        </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4 form-group">
+                                        <div className="form-group">
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Card Number</label>
+                                            <input type="text"
+                                                required
+                                                className="form-control"
+                                                value={this.state.cardNum}
+                                                onChange={this.onChangeCardNumber}
+                                            />
+                                            <p />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>CVC</label>
+                                            <input type="text"
+                                                required
+                                                className="form-control"
+                                                value={this.state.cvcNum}
+                                                onChange={this.onChangeCVCNum}
+                                            />
+                                            <p />
+                                        </div>
+                                    </div>
                                             <div className="text-center align-middle form-group">
                                                 <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Add Order" />
                                             </div>
@@ -635,22 +398,7 @@ export class CreateOrder extends Component {
 
                                 </div>
 
-                                <div class="">
-                                <Modal show={this.state.show} onHide={this.closeModalBox} centered size={"xl"}>
-                                    <Modal.Header className='px-5 pt-4 border-2 shadow-md bg-gray-50' closeButton>
-                                        <div class="">
-                                            <Modal.Title className='items-center' >
-                                                <p className='font-semibold text-black uppercase '>
-                                                    Add Payment Details
-                                                </p>
-                                            </Modal.Title>
-                                        </div>
-                                    </Modal.Header >
-                                    <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
-                                        <CreatePayment payId={this.state.id} key={this.state.id} close={this.closeModalBox} />
-                                    </Modal.Body>
-                                </Modal>
-                            </div>
+                               
                             </div>
                         </div>
                     </div>

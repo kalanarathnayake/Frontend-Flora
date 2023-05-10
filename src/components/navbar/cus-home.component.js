@@ -3,6 +3,8 @@ import { Carousel, initTE } from "tw-elements";
 import AuthenticationService from "../user/AuthenticationService";
 import axios from 'axios';
 import 'tw-elements';
+import { CreateOrder } from "../order/order-add.component";
+import { Modal } from "react-bootstrap";
 
 initTE({ Carousel });
 
@@ -10,6 +12,7 @@ class CusHome extends Component {
 
     constructor(props) {
         super(props);
+        this.gotoOrder = this.gotoOrder.bind(this);
         this.state = {
             products: [],
 
@@ -20,6 +23,22 @@ class CusHome extends Component {
 
     componentDidMount() {
         this.productList();
+    }
+
+    gotoOrder = (id) => {
+        this.setState({
+            id: id,
+            show: true
+
+        })
+        console.log("LIst id is :" +id);
+    }
+
+    //Modal box
+    closeModalBoxForOrder = () => {
+        this.setState({ show: false })
+        // this.refreshList();
+       
     }
 
     productList() {

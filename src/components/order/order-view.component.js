@@ -11,16 +11,15 @@ export default class ViewOrder extends Component {
             id:props.orId,
             orderId: '',
             customer:'',
-            item1: '',
-            quantity1: '',
-            item2: '',
-            quantity2: '',
-            item3: '',
-            quantity3:'',
+            item: '',
+            quantity: '',
             orderFor:'',
             deliveryAddress:'',
             amount:'',
-            orderStatus:''
+            orderStatus:'',
+            paymentStatus:'',
+            bankName:'',
+            accName:''
 
         }
     }
@@ -31,16 +30,15 @@ export default class ViewOrder extends Component {
                 this.setState({
                     orderId: response.data._id,
                     customer: response.data.customer,
-                    item1: response.data.item1,
-                    quantity1: response.data.quantity1,
-                    item2: response.data.item2,
-                    quantity2: response.data.quantity2,
-                    item3: response.data.item3,
-                    quantity3: response.data.quantity3,
+                    item: response.data.item,
+                    quantity: response.data.quantity,
                     orderFor: response.data.orderFor,
                     deliveryAddress: response.data.deliveryAddress,
                     amount: response.data.amount,
                     orderStatus: response.data.orderStatus,
+                    paymentStatus: response.data.paymentStatus,
+                    bankName: response.data.bankName,
+                    accName: response.data.accName,
 
                 })
             })
@@ -86,90 +84,37 @@ export default class ViewOrder extends Component {
                                             </div>
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Item 1</label>
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Item</label>
                                                     <input type="text"
                                                         required
                                                         className="form-control"
-                                                        value={this.state.item1}
+                                                        value={this.state.item}
                                                        
                                                     />
                                                     <p />
                                                 </div>
                                                 <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Quantity 1</label>
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Quantity</label>
                                                     <input type="text"
                                                         required
                                                         className="form-control"
-                                                        value={this.state.quantity1}
+                                                        value={this.state.quantity}
                                                        
                                                     /><p />
                                                 </div>
                                             </div>
 
-                                            <div class="grid grid-cols-2 gap-4 form-group">
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Item 2</label>
+                                            <div className="form-group">
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Delivery Address</label>
                                                     <input type="text"
                                                         required
                                                         className="form-control"
-                                                        value={this.state.item2}
-                                                       
-                                                    />
-                                                    <p />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Quantity 2</label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.quantity2}
+                                                        value={this.state.deliveryAddress}
                                                        
                                                     /><p />
                                                 </div>
-                                            </div>
-                                            <div class="grid grid-cols-2 gap-4 form-group">
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Item 3</label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.item3}
-                                                       
-                                                    />
-                                                    <p />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Quantity 3</label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.quantity3}
-                                                       
-                                                    /><p />
-                                                </div>
-                                            </div>
-                                            <div class="grid grid-cols-2 gap-4 form-group">
-                                            <div className="form-group">
-                                                <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Order For</label>
-                                                <input type="text"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.orderFor}
-                                                   
-                                                /><p />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">Delivery Address</label>
-                                                <input type="text"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.deliveryAddress}
-                                                   
-                                                /><p />
-                                                   
-                                               
-                                            </div>
-                                            </div>
+                                          
+                                          
 
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
@@ -192,6 +137,38 @@ export default class ViewOrder extends Component {
                                                     /><p />
                                                 </div>
                                             </div>
+
+                                            <div class="grid grid-cols-2 gap-4 form-group">
+                                                <div className="form-group">
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Bank Name</label>
+                                                    <input type="text"
+                                                        required
+                                                        className="form-control"
+                                                        value={this.state.bankName}
+                                                       
+                                                    />
+                                                    <p />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Account Name</label>
+                                                    <input type="text"
+                                                        required
+                                                        className="form-control"
+                                                        value={this.state.accName}
+                                                       
+                                                    /><p />
+                                                </div>
+                                            </div>
+
+                                            <div className="form-group">
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Payment Status</label>
+                                                    <input type="text"
+                                                        required
+                                                        className="form-control"
+                                                        value={this.state.paymentStatus}
+                                                       
+                                                    /><p />
+                                                </div>
 
                                             
                                         </form>

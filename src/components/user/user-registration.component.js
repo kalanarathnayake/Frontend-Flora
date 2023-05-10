@@ -150,6 +150,7 @@ export class UserRegistration extends Component {
                                                 <option>Inventory Manager</option>
                                                 <option>Delivery Manager</option>
                                                 <option>Product Manager</option>
+                                                <option>Order Manager</option>
                                                 <option>Finance Manager</option>
                                                 <option>Green House Manager</option>
                                                 <option>Supplier Manager</option>

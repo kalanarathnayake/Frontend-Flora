@@ -17,7 +17,7 @@ const Order = props => (
         <td className='px-6 py-4'>{props.order.amount}</td>
         <td className='px-6 py-4'><span
                 class="text-base inline-block whitespace-nowrap rounded-full bg-green-400 p-1 hover:bg-green-500 hover:drop-shadow-md hover:text-white  px-2 pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">{props.order.orderStatus}</span></td>
-        <td className='px-6 py-4'>{props.order.assignedEmp}</td>
+        {/* <td className='px-6 py-4'>{props.order.assignedEmp}</td> */}
         <td className='px-6 py-4'>
             <div class="flex justify-center">
                 <div class="">
@@ -213,20 +213,16 @@ export class ReadyDeliveryList extends Component {
         const marginLeft = 40;
         const doc = new jsPDF( orientation, unit, size );
 
-        const title = "Completed Delivery List Report ";
-        const headers = [["Delivery ID","Order ID","Customer","Item 1","Quantity 1","Item 2","Quantity 2","Item 3","Quantity 3","Delivery Address","Amount","Order Status","Assigned Driver"]];
+        const title = "Ready Delivery List Report ";
+        const headers = [["Delivery ID","Order ID","Customer","Item","Quantity","Delivery Address","Amount","Order Status","Assigned Driver"]];
 
         const del = this.state.delivery.map(
             Delivery=>[
                 Delivery._id,
                 Delivery.orderId,
                 Delivery.customer,
-                Delivery.item1,
-                Delivery.quantity1,
-                Delivery.item2,
-                Delivery.quantity2,
-                Delivery.item3,
-                Delivery.quantity3,
+                Delivery.item,
+                Delivery.quantity,
                 Delivery.deleteDelivery,
                 Delivery.amount,
                 Delivery.orderStatus,
@@ -245,7 +241,7 @@ export class ReadyDeliveryList extends Component {
         doc.text( title, marginLeft, 40 );
         require('jspdf-autotable');
         doc.autoTable( content );
-        doc.save( "Completed-Delivery-list.pdf" )
+        doc.save( "Ready-Delivery-list.pdf" )
     }
 
 

@@ -11,7 +11,7 @@ export class CreateDelivery extends Component {
         super(props);
 
 
-        this.deleteOrder = this.deleteOrder.bind(this);
+        // this.deleteOrder = this.deleteOrder.bind(this);
         this.onChangedriver = this.onChangedriver.bind(this);
 
         this.updateOrderStatus = this.updateOrderStatus.bind(this);
@@ -24,12 +24,8 @@ export class CreateDelivery extends Component {
             id: props.deId,
             orderId: '',
             customer: '',
-            item1: '',
-            quantity1: '',
-            item2: '',
-            quantity2: '',
-            item3: '',
-            quantity3: '',
+            item: '',
+            quantity: '',
             deliveryAddress: '',
             amount: '',
             orderStatus: '',
@@ -52,12 +48,8 @@ export class CreateDelivery extends Component {
                 this.setState({
                     orderId: response.data._id,
                     customer: response.data.customer,
-                    item1: response.data.item1,
-                    quantity1: response.data.quantity1,
-                    item2: response.data.item2,
-                    quantity2: response.data.quantity2,
-                    item3: response.data.item3,
-                    quantity3: response.data.quantity3,
+                    item: response.data.item,
+                    quantity: response.data.quantity,
                     deliveryAddress: response.data.deliveryAddress,
                     amount: response.data.amount,
                     orderStatus: response.data.orderStatus,
@@ -69,15 +61,15 @@ export class CreateDelivery extends Component {
 
     }
 
-    deleteOrder(id) {
-        axios.delete('http://localhost:5000/order/' + id).then(response => {
-            console.log(response.status)
+    // deleteOrder(id) {
+    //     axios.delete('http://localhost:5000/order/' + id).then(response => {
+    //         console.log(response.status)
 
 
 
-        })
+    //     })
 
-    }
+    // }
 
     updateOrderStatus(id) {
 
@@ -99,12 +91,8 @@ export class CreateDelivery extends Component {
         const delivery = {
             orderId: this.state.orderId,
             customer: this.state.customer,
-            item1: this.state.item1,
-            quantity1: this.state.quantity1,
-            item2: this.state.item2,
-            quantity2: this.state.quantity2,
-            item3: this.state.item3,
-            quantity3: this.state.quantity3,
+            item: this.state.item,
+            quantity: this.state.quantity,
             deliveryAddress: this.state.deliveryAddress,
             amount: this.state.amount,
             orderStatus: 'Delivery Ongoing',
@@ -154,12 +142,8 @@ export class CreateDelivery extends Component {
         this.setState({
             orderId: '',
             customer: '',
-            item1: '',
-            quantity1: '',
-            item2: '',
-            quantity2: '',
-            item3: '',
-            quantity3: '',
+            item: '',
+            quantity: '',
             deliveryAddress: '',
             amount: '',
             orderStatus: '',
@@ -219,7 +203,7 @@ export class CreateDelivery extends Component {
                                                             required
                                                             disabled
                                                             className="form-control"
-                                                            value={this.state.item1}
+                                                            value={this.state.item}
 
                                                         />
                                                     </div>
@@ -231,63 +215,12 @@ export class CreateDelivery extends Component {
                                                         <input type="text"
                                                             className="form-control"
                                                             disabled
-                                                            value={this.state.quantity1}
+                                                            value={this.state.quantity}
 
                                                         />
                                                     </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-1 gap-4 form-group">
-                                                    <div class="form-group">
-                                                        <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                            Item2                                                       </label>
-                                                        <input type="text"
-                                                            required
-                                                            disabled
-                                                            className="form-control"
-                                                            value={this.state.item2}
-
-                                                        />
-                                                    </div>
-
-
-                                                    <div className="form-group">
-                                                        <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Quantity2                                                    </label>
-                                                        <input type="text"
-                                                            className="form-control"
-                                                            disabled
-                                                            value={this.state.quantity2}
-
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="grid grid-cols-1 gap-4 form-group">
-                                                    <div class="form-group">
-                                                        <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                            Item3                                                        </label>
-                                                        <input type="text"
-                                                            required
-                                                            disabled
-                                                            className="form-control"
-                                                            value={this.state.item3}
-
-                                                        />
-                                                    </div>
-
-
-                                                    <div className="form-group">
-                                                        <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Quantity3                                                  </label>
-                                                        <input type="text"
-                                                            className="form-control"
-                                                            disabled
-                                                            value={this.state.quantity3}
-
-                                                        />
-                                                    </div>
-                                                </div>
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                     <div className="form-group">
                                                         <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
