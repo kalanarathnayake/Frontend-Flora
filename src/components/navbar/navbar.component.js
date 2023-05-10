@@ -62,7 +62,7 @@ class navbar extends Component {
             {unknownUser &&
               <>
                 <div className="mb-2 sm:mb-0">
-                  <a href="/" className="text-xl text-pink-600 no-underline duration-300 hover:text-pink-dark hover:font-bold">Home</a>
+                  <a href="/" className="font-serif text-xl font-semibold text-pink-600 no-underline uppercase duration-300">Sonduruma mal<span class="">🌸</span></a>
                 </div>
                 <div class="">
                 </div>

@@ -12,14 +12,14 @@ class CusHome extends Component {
         super(props);
         this.state = {
             products: [],
-            
+
             search: "Jetwing Colombo Seven",
             show: false,
         };
     }
 
     componentDidMount() {
-       this.productList();
+        this.productList();
     }
 
     productList() {
@@ -34,84 +34,91 @@ class CusHome extends Component {
 
     searchProductList() {
         return this.state.products.map((currentProduct) => {
-             {
+            {
                 return (
-                    <div className="mt-5 mb-12 shadow-xl card w-96 bg-base-100 hover:scale-105" >
-                        <figure><img src={currentProduct.image} alt="Weddings" className='h-96' /></figure>
-                        <div className="card-body">
-                            <h2 className="justify-center font-bold card-title">{currentProduct.productName}</h2>
-                            <p className='px-3 text-justify'>{currentProduct.productCategory}</p>
-                            <table>
-                                <tr className='flex justify-between'>
+                    <div class="container">
+                        <div className="mt-5 mb-5 duration-300 shadow-xl card w-96 bg-base-100 hover:scale-105" >
+                            <figure>
+                                <img src={currentProduct.image} alt="Weddings" className='h-96 w-96' />
+                            </figure>
+                            <div className=" card-body">
+                                <h2 className="text-4xl font-bold text-center text-pink-600 uppercase duration-300 hover:text-red-500 card-title">{currentProduct.productName}</h2>
+                                <p className='text-xl font-medium text-center'>{currentProduct.productCategory}</p>
+                                <div class="flex justify-between">
                                     <div>
-                                        <td>{currentProduct.discount} Seats</td>
+                                        <span class="text-lg font-bold">{currentProduct.discount}</span> LKR
                                     </div>
                                     <div>
-                                        <th className='text-cyan-800'>{currentProduct.price} per plate</th>
+                                        <span class=" text-lg font-bold">{currentProduct.price}</span> Per Flower
                                     </div>
-                                </tr>
-                            </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                );
+                )
             }
         });
     }
 
-  render() {
-    // const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-    // const loggedUserRole = AuthenticationService.loggedUserRole();
-    // // const loggedUser = AuthenticationService.loggedUserName();
-    // let loggedAsEManager = false;
-    // let loggedAsCManager = false;
-    // let loggedAsEditor = false;
-    // let unknownUser = false;
+    render() {
+        // const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        // const loggedUserRole = AuthenticationService.loggedUserRole();
+        // // const loggedUser = AuthenticationService.loggedUserName();
+        // let loggedAsEManager = false;
+        // let loggedAsCManager = false;
+        // let loggedAsEditor = false;
+        // let unknownUser = false;
 
-    // if (isUserLoggedIn === true) {
-    //   console.log("User Logged In")
-    // } else {
-    //   unknownUser = true;
-    // }
+        // if (isUserLoggedIn === true) {
+        //   console.log("User Logged In")
+        // } else {
+        //   unknownUser = true;
+        // }
 
-    // if (loggedUserRole != null && loggedUserRole === 'Employee Manager') {
-    //   loggedAsEManager = true;
-    // }
-    // if (loggedUserRole != null && loggedUserRole === 'Customer Manager') {
-    //   loggedAsCManager = true;
-    // }
-    // if (loggedUserRole != null && loggedUserRole === 'editor') {
-    //   loggedAsEditor = true;
-    // }
+        // if (loggedUserRole != null && loggedUserRole === 'Employee Manager') {
+        //   loggedAsEManager = true;
+        // }
+        // if (loggedUserRole != null && loggedUserRole === 'Customer Manager') {
+        //   loggedAsCManager = true;
+        // }
+        // if (loggedUserRole != null && loggedUserRole === 'editor') {
+        //   loggedAsEditor = true;
+        // }
 
-    
 
-    return (
-      <div class="">
-      <div class="w-100">
-          <img src="https://plazahollandi.com/wp-content/uploads/2020/09/bunches-of-tulips-scaled.jpg" alt="Jetwing Colombo Seven" />
-      </div>
-      
-      {/* events and meetings */}
-      <section class="">
-          
-          <div class="text-center bg-white text-gray-800 px-6">
-              <h1 class="text-5xl text-blue-950 md:text-6xl xl:text-3xl font-bold tracking-tight uppercase drop-shadow-md ">Products<br />
-              </h1>
-          </div>
-      </section>
-      
-      <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12 mb-5 grid grid-cols-3 content-center ">
+
+        return (
+            <div class="">
+                <div class="container pb-12">
+                    {/* <img className="object-contain object-center max-w-full bg-yellow-300" src="https://plazahollandi.com/wp-content/uploads/2020/09/bunches-of-tulips-scaled.jpg" alt="Jetwing Colombo Seven" /> */}
+                    <div class="object-center bg-[url(https://wallpapershome.com/images/pages/pic_h/3787.jpg)] h-[600px] w-[1296px] relative">
+                        <div class="absolute top-48 text-center px-4 py-3 bg-slate-300/50 font-serif w-full">
+                            <h1 class="text-white font-bold text-7xl"><span class="text-pink-600 text-8xl">S</span>onduruma <span class="text-pink-600 text-8xl">M</span>al<span class="">🌸</span></h1>
+                        </div>
+                    </div>
+                </div>
+
+                {/* events and meetings */}
+                <section class="container">
+                    <div class="text-center bg-white text-gray-800 px-6">
+                        <h1 class="text-6xl text-blue-950 md:text-6xl xl:text-3xl font-bold tracking-tight uppercase drop-shadow-md ">Products<br />
+                        </h1>
+                        <hr />
+                    </div>
+                </section>
+
+                <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12 mb-5 grid grid-cols-3 content-center ">
                     {this.searchProductList()}
                 </div>
 
-      
-      
-     
-      {/*  */}
-      
-  </div>
-    );
-  }
+
+
+
+                {/*  */}
+
+            </div>
+        );
+    }
 }
 
 export default CusHome;

@@ -36,9 +36,9 @@ class home extends Component {
       <div class="">
         <div class="container pb-12">
           {/* <img className="object-contain object-center max-w-full bg-yellow-300" src="https://plazahollandi.com/wp-content/uploads/2020/09/bunches-of-tulips-scaled.jpg" alt="Jetwing Colombo Seven" /> */}
-          <div class="object-center bg-[url(https://wallpapershome.com/images/pages/pic_h/19707.jpg)] h-[600px] w-[1296px] relative">
+          <div class="object-center bg-[url(https://wallpapershome.com/images/pages/pic_h/17852.jpg)] h-[600px] w-[1296px] relative">
             <div class="absolute top-48 text-center px-4 py-3 bg-slate-300/50 font-serif w-full">
-              <h1 class="text-white font-bold text-7xl"><span class="text-pink-600 text-8xl">S</span> onduruma <span class="text-pink-600 text-8xl">M</span>al </h1>
+              <h1 class="text-white font-bold text-7xl"><span class="text-pink-600 text-8xl">S</span>onduruma <span class="text-pink-600 text-8xl">M</span>al<span class="">🌸</span></h1>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@ class home extends Component {
             </h1>
           </div>
         </section>
-        <div class=" gap-2 container mx-auto px-5 py-2 lg:px-32 lg:pt-12 mb-5 grid grid-cols-3 content-center" >
+        <div class="container mx-auto px-5 py-2 lg:px-32 lg:pt-12 mb-5 grid grid-cols-3 content-center" >
           <div className="duration-500 shadow-xl card w-96 bg-base-100 hover:scale-105">
             <figure>
               <img src="https://wallpapershome.com/images/pages/pic_h/17611.jpg" alt="Shoes" class="h-72 object-cover " />
