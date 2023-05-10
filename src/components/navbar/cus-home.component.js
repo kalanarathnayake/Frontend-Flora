@@ -16,7 +16,7 @@ class CusHome extends Component {
         this.state = {
             products: [],
 
-            search: "Jetwing Colombo Seven",
+            search: "",
             show: false,
         };
     }
@@ -56,7 +56,7 @@ class CusHome extends Component {
             {
                 return (
                     <div class="container">
-                        <div className="mt-5 mb-5 duration-300 shadow-xl card w-96 bg-base-100 hover:scale-105" >
+                        <div className="mt-5 mb-5 duration-300 shadow-xl card w-96 bg-base-100 hover:scale-105" onClick={() => { this.gotoOrder(currentProduct._id) }}>
                             <figure>
                                 <img src={currentProduct.image} alt="Weddings" className='h-96 w-96' />
                             </figure>
@@ -131,7 +131,13 @@ class CusHome extends Component {
                 </div>
 
 
-
+                <div class="">
+                                <Modal show={this.state.show} onHide={this.closeModalBoxForOrder} centered size={"xl"}>
+                                    <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
+                                        <CreateOrder proId={this.state.id} key={this.state.id} close={this.closeModalBoxForOrder} />
+                                    </Modal.Body>
+                                </Modal>
+                            </div>
 
                 {/*  */}
 
