@@ -198,7 +198,7 @@ export class CreateDelivery extends Component {
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                     <div class="form-group">
                                                         <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                            Item1                                                        </label>
+                                                            Item                                                        </label>
                                                         <input type="text"
                                                             required
                                                             disabled
@@ -211,7 +211,7 @@ export class CreateDelivery extends Component {
 
                                                     <div className="form-group">
                                                         <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                            Quantity1                                                    </label>
+                                                            Quantity                                                    </label>
                                                         <input type="text"
                                                             className="form-control"
                                                             disabled
