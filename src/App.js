@@ -21,31 +21,13 @@ import { ProductList } from './components/product/product-list.component'
 import { CreateProduct } from './components/product/product-add.component'
 import { InventoryOrderList } from './components/inventoryOrder/inventoryOrders-list.component'
 import { CreateInventoryOrder } from './components/inventoryOrder/inventoryOrders-add.component'
-import { InventoryListForOrder } from './components/inventory/inventory-list-forOrders.component'
+
 import { DeliveryList } from './components/delivery/delivery-list.component'
-import { KitchenOrderList } from './components/kitchen/kitchenOrder-list.component'
-import { CompletedDeliveryList } from './components/delivery/completed-delivery-list.component'
-import { OngoingDeliveryList } from './components/delivery/ongoing-delivery.component'
+
 import { ReadyDeliveryList } from './components/delivery/ready-delivery.component'
-import { ScheduleList } from './components/schedule/schedule-list.component';
-import { AllScheduleList } from './components/schedule/allSchedule-list.component';
-import { CreateSchedule } from './components/schedule/add-schedule.component';
-import { ScheduleRequestList } from './components/schedule/scheduleRequest-list.component';
-import { PendingScheduleRequestList } from './components/schedule/pendingScheduleRequest-list.component';
-import { ApprovedScheduleRequestList } from './components/schedule/approvedScheduleRequest-list.component';
-import { DeclinedScheduleRequestList } from './components/schedule/declinedSchedule.component';
+
 import { CreateSalary } from './components/salary/salary-add.component';
 import { SalaryList } from './components/salary/salary-list.component';
-import { CreateOT } from './components/overTime/overTime-add.component';
-import { OTList } from './components/overTime/overTime-list.component';
-import EditOT from './components/overTime/overTime-edit.component';
-import { InventoryOrderListKitchen } from './components/inventoryOrder/inventoryOrder-list-kitchen.component';
-
-import { FeedbackList } from './components/feedback/feedback-list.component'
-import { CreateFeedback } from './components/feedback/feedback-add.component'
-import EditFeedback from './components/feedback/feedback-edit.component'
-
-import CreatePayment from './components/order/payment-add.component';
 
 
 import { UserRegistration } from './components/user/user-registration.component';
@@ -111,38 +93,16 @@ function App() {
           <Route exact path="/creatInventoryOrder" element={<CreateInventoryOrder />} />  {/* dont edit this */}
 
           <Route exact path="/delivery" element={<DeliveryList />} /> {/* Done */}
-          <Route exact path="/completedDelivery" element={<CompletedDeliveryList />} /> {/* Done */}
-          <Route exact path="/ongoingDelivery" element={<OngoingDeliveryList />} /> {/* Done */}
+         
           <Route exact path="/readyDelivery" element={<ReadyDeliveryList />} />{/* Done  and need to check with data*/}
 
-          <Route exact path="/kitchenOrder" element={<KitchenOrderList />} /> {/* Done */}
-
-          <Route exact path="/inventorylistfororder" element={<InventoryListForOrder />} /> {/* Done */}
-
-          <Route exact path="/feedback" element={<FeedbackList />} />{/* Done */}
-          <Route exact path="/creatFeedback" element={<CreateFeedback />} />{/* Done */}
-          <Route exact path="/editFeedback/:id" element={EditFeedback} />{/* Done */}
 
           <Route exact path="/signUp" element={<UserRegistration />} />{/* Done */}
           <Route exact path="/signIn" element={<UserLogin />} />{/* Done */}
 
-          <Route exact path="/schedule" element={<ScheduleList />} />{/* Done */}
-          <Route exact path="/allSchedule" element={<AllScheduleList />} />{/* Done */}
-          <Route exact path="/creatSchedule" element={<CreateSchedule />} />{/* Done */}
-          <Route exact path="/scheduleRequestLsit" element={<ScheduleRequestList />} />{/* Done */}
-          <Route exact path="/pendingScheduleRequestLsit" element={<PendingScheduleRequestList />} />{/* Done */}
-          <Route exact path="/approvedScheduleRequestLsit" element={<ApprovedScheduleRequestList />} />{/* Done */}
-          <Route exact path="/decliedScheduleRequestLsit" element={<DeclinedScheduleRequestList />} />{/* Done */}
-
           <Route exact path="/createSalary" element={<CreateSalary />} />{/* Done */}
           <Route exact path="/salary" element={<SalaryList />} />{/* Done */}
-          <Route exact path="/createOT" element={<CreateOT />} />{/* Done */}
-          <Route exact path="/ot" element={<OTList />} />{/* Done */}
-          <Route exact path="/editOT/:id" element={EditOT} />{/* Done */}
 
-          <Route exact path="/iokitchen" element={<InventoryOrderListKitchen />} />{/* Done */}
-
-          <Route exact path="/payment" element={<CreatePayment />} />{/* Done */}
 
           <Route exact path="/greenHouse" element={<GreenHouseList />} />{/* Done */}
           <Route exact path="/createGreenHouse" element={<CreateGreenHouse />} />{/* Done */}

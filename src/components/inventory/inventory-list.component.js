@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Modal } from "react-bootstrap";
 import EditInventory from './inventory-edit.component'
+import { CreateInventoryOrder } from '../inventoryOrder/inventoryOrders-add.component';
 
 const Inventory = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
@@ -14,6 +15,22 @@ const Inventory = props => (
         <td className='px-6 py-4'>{props.inventory.productCategory}</td>
         <td className='px-6 py-4'>{props.inventory.quantity}</td>
         <td className='px-6 py-4'>{props.inventory.productDiscription}</td>
+        <td className='px-6 py-4'>
+            <div class="flex justify-center">
+                <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoOrderInventory(props.inventory._id) }}>
+                    <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
+                        <div class="">
+                            <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                            </svg>
+                        </div>
+                        <div class="">
+                            Order
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </td>
         <td className='px-6 py-4'>
             <div class="flex justify-center">
                 <div class="">
@@ -54,16 +71,30 @@ export class InventoryList extends Component {
         super(props);
         this.deleteInventory = this.deleteInventory.bind(this);
         this.gotoUpdateInventory = this.gotoUpdateInventory.bind(this);
+        this.gotoOrderInventory = this.gotoOrderInventory.bind(this);
         this.state = {
             inventory: [],
             searchInventory: "",
-            show: false
+            show: false,
+            display: false
         };
     }
 
     componentDidMount() {
         this.refreshList();
     };
+
+    gotoOrderInventory(id) {
+        this.setState({
+            id: id,
+            display: true
+        })
+    }
+
+    closeModalBox2 = () => {
+        this.setState({ display: false })
+        this.refreshList();
+    }
 
     refreshList() {
         axios.get('http://localhost:5000/inventory/')
@@ -123,6 +154,7 @@ export class InventoryList extends Component {
                 inventory={currentinventory}
                 deleteInventory={this.deleteInventory}
                 gotoUpdateInventory={this.gotoUpdateInventory}
+                gotoOrderInventory={this.gotoOrderInventory}
                 key={currentinventory._id}
             />;
         })
@@ -140,6 +172,22 @@ export class InventoryList extends Component {
                         <td className='px-6 py-4'>{currentinventory.productCategory}</td>
                         <td className='px-6 py-4'>{currentinventory.quantity}</td>
                         <td className='px-6 py-4'>{currentinventory.productDiscription}</td>
+                        <td className='px-6 py-4'>
+                            <div class="flex justify-center">
+                                <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoOrderInventory(currentinventory._id) }}>
+                                    <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
+                                        <div class="">
+                                            <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="">
+                                            Order
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </td>
                         <td className='flex justify-center px-6 py-4 '>
                             {
                                 <div class="">
@@ -265,6 +313,7 @@ export class InventoryList extends Component {
                                             <th className="p-2tbhead">productCategory</th>
                                             <th className="p-2tbhead">Quantity</th>
                                             <th className="p-2tbhead">Product Description</th>
+                                            <th className="p-2 text-center tbhead">Order</th>
                                             <th className="p-2 text-center tbhead">Actions</th>
                                         </tr>
                                     </thead>
@@ -286,6 +335,22 @@ export class InventoryList extends Component {
                                     </Modal.Header >
                                     <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
                                         <EditInventory invId={this.state.id} key={this.state.id} close={this.closeModalBox} />
+                                    </Modal.Body>
+                                </Modal>
+                            </div>
+                            <div class="">
+                                <Modal show={this.state.display} onHide={this.closeModalBox2} centered size={"xl"}>
+                                    <Modal.Header className='px-5 pt-4 border-2 shadow-md bg-gray-50' closeButton>
+                                        <div class="">
+                                            <Modal.Title className='items-center' >
+                                                <p className='font-semibold text-black uppercase '>
+                                                    Order Inventory
+                                                </p>
+                                            </Modal.Title>
+                                        </div>
+                                    </Modal.Header >
+                                    <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
+                                        <CreateInventoryOrder ioId={this.state.id} key={this.state.id} close={this.closeModalBox2} />
                                     </Modal.Body>
                                 </Modal>
                             </div>

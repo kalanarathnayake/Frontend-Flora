@@ -192,7 +192,8 @@ export class DeliveryList extends Component {
                         <td className='px-6 py-4'>{currentdelivery.customer}</td>
                         <td className='px-6 py-4'>{currentdelivery.deliveryAddress}</td>
                         <td className='px-6 py-4'>{currentdelivery.amount}</td>
-                        <td className='px-6 py-4'>{currentdelivery.orderStatus}</td>
+                        <td className='px-6 py-4'><span
+                class="text-base inline-block whitespace-nowrap rounded-full bg-green-400 p-1 hover:bg-green-500 hover:drop-shadow-md hover:text-white  px-2 pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">{currentdelivery.orderStatus}</span></td>
 
 
                         <td className='px-6 py-4'>
@@ -276,18 +277,14 @@ export class DeliveryList extends Component {
         const marginLeft = 40;
         const doc = new jsPDF(orientation, unit, size);
         const title = "Delivery List Report ";
-        const headers = [["Delivery ID", "Order ID", "Customer", "Item 1", "Quantity 1", "Item 2", "Quantity 2", "Item 3", "Quantity 3", "Delivery Address", "Amount", "Order Status", "Assigned Driver"]];
+        const headers = [["Delivery ID", "Order ID", "Customer", "Item", "Quantity", "Delivery Address", "Amount", "Order Status", "Assigned Driver"]];
         const del = this.state.delivery.map(
             Delivery => [
                 Delivery._id,
                 Delivery.orderId,
                 Delivery.customer,
-                Delivery.item1,
-                Delivery.quantity1,
-                Delivery.item2,
-                Delivery.quantity2,
-                Delivery.item3,
-                Delivery.quantity3,
+                Delivery.item,
+                Delivery.quantity,
                 Delivery.deleteDelivery,
                 Delivery.amount,
                 Delivery.orderStatus,
@@ -323,11 +320,7 @@ export class DeliveryList extends Component {
                                         <td className='flex justify-end gap-2'>
 
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end gap-2">
-                                                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                    <Link className='font-semibold text-white no-underline' to={"/creatDelivery"}>
-                                                        Add Delivery Details
-                                                    </Link>
-                                                </button>
+                                               
                                                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => { this.exportDelivery() }}>
 
                                                     Download Report Here

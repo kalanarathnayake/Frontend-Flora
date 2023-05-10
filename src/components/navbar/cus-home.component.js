@@ -3,6 +3,8 @@ import { Carousel, initTE } from "tw-elements";
 import AuthenticationService from "../user/AuthenticationService";
 import axios from 'axios';
 import 'tw-elements';
+import { CreateOrder } from "../order/order-add.component";
+import { Modal } from "react-bootstrap";
 
 initTE({ Carousel });
 
@@ -10,6 +12,7 @@ class CusHome extends Component {
 
     constructor(props) {
         super(props);
+        this.gotoOrder = this.gotoOrder.bind(this);
         this.state = {
             products: [],
             
@@ -20,6 +23,22 @@ class CusHome extends Component {
 
     componentDidMount() {
        this.productList();
+    }
+
+    gotoOrder = (id) => {
+        this.setState({
+            id: id,
+            show: true
+
+        })
+        console.log("LIst id is :" +id);
+    }
+
+    //Modal box
+    closeModalBoxForOrder = () => {
+        this.setState({ show: false })
+        // this.refreshList();
+       
     }
 
     productList() {
@@ -36,7 +55,7 @@ class CusHome extends Component {
         return this.state.products.map((currentProduct) => {
              {
                 return (
-                    <div className="mt-5 mb-12 shadow-xl card w-96 bg-base-100 hover:scale-105" >
+                    <div className="mt-5 mb-12 shadow-xl card w-96 bg-base-100 hover:scale-105" onClick={() => { this.gotoOrder(currentProduct._id) }}>
                         <figure><img src={currentProduct.image} alt="Weddings" className='h-96' /></figure>
                         <div className="card-body">
                             <h2 className="justify-center font-bold card-title">{currentProduct.productName}</h2>
@@ -108,6 +127,22 @@ class CusHome extends Component {
       
      
       {/*  */}
+      <div class="">
+                                <Modal show={this.state.show} onHide={this.closeModalBoxForOrder} centered size={"xl"}>
+                                    <Modal.Header className='px-5 pt-4 border-2 shadow-md bg-gray-50' closeButton>
+                                        <div class="">
+                                            <Modal.Title className='items-center' >
+                                                <p className='font-semibold text-black uppercase '>
+                                                    Create Order
+                                                </p>
+                                            </Modal.Title>
+                                        </div>
+                                    </Modal.Header >
+                                    <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
+                                        <CreateOrder proId={this.state.id} key={this.state.id} close={this.closeModalBoxForOrder} />
+                                    </Modal.Body>
+                                </Modal>
+                            </div>
       
   </div>
     );

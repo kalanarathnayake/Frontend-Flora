@@ -21,6 +21,7 @@ class navbar extends Component {
     let loggedAsIManager = false;
     // let loggedAsWStaff = false;
     let loggedAsGHManager = false;
+    let loggedAsOManager = false;
     let loggedAsDManager = false;
     let loggedAsPManager = false;
     let loggedAsFManager = false;
@@ -51,7 +52,9 @@ class navbar extends Component {
     }
     if (loggedUserRole != null && loggedUserRole === 'Product Manager') {
       loggedAsPManager = true;
-    } if (loggedUserRole != null && loggedUserRole === 'Finance Manager') {
+    } if (loggedUserRole != null && loggedUserRole === 'Order Manager') {
+      loggedAsOManager = true;
+    }if (loggedUserRole != null && loggedUserRole === 'Finance Manager') {
       loggedAsFManager = true;
     }
 
@@ -86,11 +89,7 @@ class navbar extends Component {
                     <>
                       <div>
                         <a href="/employee" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Employees</a>
-                        {/* <a href="/feedback" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Feedback</a>
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
-                        <a href="/creatSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Add Schedule</a>
-                        <a href="/scheduleRequestLsit" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedule Requests</a> */}
+                        
                       </div>
                     </>
                   }
@@ -101,14 +100,20 @@ class navbar extends Component {
                      
                     </div>
                   }
+                  {loggedAsOManager &&
+                    <div>
+                      <a href="/order" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Orders</a>
+                     
+                    </div>
+                  }
 
                   {loggedAsIManager &&
                     <>
                       <div>
                         <a href="/inventory" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory</a>
-                        <a href="/inventoryorder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory Order</a>
-                        {/* <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a> */}
+
+                          
+                       
 
                       </div>
                     </>
@@ -120,11 +125,7 @@ class navbar extends Component {
                     <>
                       <div>
                         <a href="/greenHouse" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Green House</a>
-                        {/* <a href="/inventorylistfororder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Order Inventory</a>
-
-                        <a href="/iokitchen" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory Order</a>
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a> */}
+                       
 
                       </div>
                     </>
@@ -134,11 +135,9 @@ class navbar extends Component {
                     <>
                       <div>
                         <a href="/supplier" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Supplier</a>
-                        {/* <a href="/inventorylistfororder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Order Inventory</a>
+                        <a href="/inventoryorder" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory Orders</a>
 
-                        <a href="/iokitchen" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Inventory Order</a>
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a> */}
+
 
                       </div>
                     </>
@@ -147,8 +146,7 @@ class navbar extends Component {
                   {loggedAsPManager &&
                     <div>
                       <a href="/product" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Product</a>
-                      <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                      <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
+
                     </div>
                   }
 
@@ -157,10 +155,7 @@ class navbar extends Component {
                       <div>
                         <a href="/delivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">All Deliveries</a>
                         <a href="/readyDelivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Ready Delivery</a>
-                        <a href="/completedDelivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Completed Delivery</a>
-                        <a href="/ongoingDelivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Ongoing Delivery</a>
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a>
+                        
 
                       </div>
                     </>
@@ -170,9 +165,7 @@ class navbar extends Component {
                     <>
                       <div>
                         <a href="/salary" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Salary</a>
-                        {/* <a href="/ot" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Over Time</a>
-                        <a href="/schedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Schedule</a>
-                        <a href="/allSchedule" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Schedules</a> */}
+
                       </div>
                     </>
                   }

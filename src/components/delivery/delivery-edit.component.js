@@ -22,12 +22,8 @@ export class EditDelivery extends Component {
             deliveryId:props.deId,
             orderId : '',
             customer : '',
-            item1 : '',
-            quantity1 :'',
-            item2 : '',
-            quantity2 :'',
-            item3 : '',
-            quantity3 :'',
+            item : '',
+            quantity:'',
             deliveryAddress:'',
             amount:'',
             orderStatus:'',
@@ -59,19 +55,15 @@ this.refreshList();
             axios.get('http://localhost:5000/delivery/'+this.state.deliveryId)
             .then(response => {
                 this.setState({
-                deliveryId : response.data._id,
-                orderId : response.data.orderId,
-                customer : response.data.customer,
-                item1: response.data.item1,
-                quantity1: response.data.quantity1,
-                item2: response.data.item2,
-                quantity2: response.data.quantity2,
-                item3: response.data.item3,
-                quantity3: response.data.quantity3,
-                deliveryAddress: response.data.deliveryAddress,
-                amount: response.data.amount,
-                orderStatus: response.data.orderStatus,
-                assignedEmp: response.data.assignedEmp
+                    deliveryId : response.data._id,
+                    orderId : response.data.orderId,
+                    customer : response.data.customer,
+                    item: response.data.item,
+                    quantity: response.data.quantity,
+                    deliveryAddress: response.data.deliveryAddress,
+                    amount: response.data.amount,
+                    orderStatus: response.data.orderStatus,
+                    assignedEmp: response.data.assignedEmp
                     })
                 })
                 .catch(function(error) {
@@ -86,12 +78,8 @@ this.refreshList();
         const delivery = {
             orderId : this.state.orderId,
             customer : this.state.customer,
-            item1: this.state.item1,
-            quantity1: this.state.quantity1,
-            item2: this.state.item2,
-            quantity2: this.state.quantity2,
-            item3: this.state.item3,
-            quantity3: this.state.quantity3,
+            item: this.state.item,
+            quantity: this.state.quantity,
             deliveryAddress: this.state.deliveryAddress,
             amount: this.state.amount,
             orderStatus: this.state.orderStatus,
@@ -196,12 +184,12 @@ this.refreshList();
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                 <div class="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                       Item1                                                        </label>
+                                                       Item                                                       </label>
                                                     <input type="text"
                                                         required
                                                         disabled
                                                         className="form-control"
-                                                        value={this.state.item1}
+                                                        value={this.state.item}
                                                       
                                                     />
                                                 </div>
@@ -209,67 +197,16 @@ this.refreshList();
                                             
                                                 <div className="form-group">
                                                     <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Quantity1                                                    </label>
+                                                        Quantity                                                    </label>
                                                     <input type="text"
                                                         className="form-control"
                                                         disabled
-                                                        value={this.state.quantity1}
+                                                        value={this.state.quantity}
                                                        
                                                     />
                                                 </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-1 gap-4 form-group">
-                                                <div class="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                       Item2                                                       </label>
-                                                    <input type="text"
-                                                        required
-                                                        disabled
-                                                        className="form-control"
-                                                        value={this.state.item2}
-                                                      
-                                                    />
-                                                </div>
-                                            
-                                            
-                                                <div className="form-group">
-                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Quantity2                                                    </label>
-                                                    <input type="text"
-                                                        className="form-control"
-                                                        disabled
-                                                        value={this.state.quantity2}
-                                                       
-                                                    />
-                                                </div>
-                                                </div>
-
-                                                <div className="grid grid-cols-1 gap-4 form-group">
-                                                <div class="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' >
-                                                       Item3                                                        </label>
-                                                    <input type="text"
-                                                        required
-                                                        disabled
-                                                        className="form-control"
-                                                        value={this.state.item3}
-                                                      
-                                                    />
-                                                </div>
-                                            
-                                            
-                                                <div className="form-group">
-                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
-                                                        Quantity3                                                  </label>
-                                                    <input type="text"
-                                                        className="form-control"
-                                                        disabled
-                                                        value={this.state.quantity3}
-                                                       
-                                                    />
-                                                </div>
-                                                </div>
                                                 <div className="grid grid-cols-1 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>
@@ -318,7 +255,7 @@ this.refreshList();
                                            
                                             
                                         </div>
-
+<p/>
                                         <div className="text-center align-middle form-group">
                                                 <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Edit Delivery" />
                                             </div>

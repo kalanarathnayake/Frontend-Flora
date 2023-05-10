@@ -10,16 +10,15 @@ import EditOrder from './order-edit.component';
 
 const Order = props => (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-      
+
         <td className='px-6 py-4'>{props.order._id}</td>
-        <td className='px-6 py-4'>{props.order.item1}</td>
-        <td className='px-6 py-4'>{props.order.quantity1}</td>
-        <td className='px-6 py-4'>{props.order.item2}</td>
-        <td className='px-6 py-4'>{props.order.quantity2}</td>
-        <td className='px-6 py-4'>{props.order.item3}</td>
-        <td className='px-6 py-4'>{props.order.quantity3}</td>
-       
-        
+        <td className='px-6 py-4'>{props.order.item}</td>
+        <td className='px-6 py-4'>{props.order.quantity}</td>
+        <td className='px-6 py-4'>{props.order.orderFor}</td>
+        <td className='px-6 py-4'>{props.order.amount}</td>
+
+
+
         <td className='px-6 py-4'>
             <span
                 class="text-base inline-block whitespace-nowrap rounded-full bg-green-400 p-1 hover:bg-green-500 hover:drop-shadow-md hover:text-white  px-2 pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
@@ -28,43 +27,43 @@ const Order = props => (
         </td>
 
         <td>
-        <div class="flex justify-center">
+            <div class="flex justify-center">
                 <div class="">
-                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-yellow-500 rounded-md hover:bg-yellow-200'onClick={() => { props.gotoViewOrder(props.order._id) }}>
-                       
-                            <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
-                                <div class="">
-                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                    </svg>
-                                </div>
-                                <div class="">
-                                    View
-                                </div>
+                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-yellow-500 rounded-md hover:bg-yellow-200' onClick={() => { props.gotoViewOrder(props.order._id) }}>
+
+                        <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
+                            <div class="">
+                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                </svg>
                             </div>
-                        
+                            <div class="">
+                                View
+                            </div>
+                        </div>
+
                     </button>
                 </div>
-                </div>
+            </div>
 
         </td>
 
         <td className='px-6 py-4'>
             <div class="flex justify-center">
                 <div class="">
-                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200'onClick={() => { props.gotoUpdateOrder(props.order._id) }}>
-                        
-                            <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
-                                <div class="">
-                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                    </svg>
-                                </div>
-                                <div class="">
-                                    Edit
-                                </div>
+                    <button className='inline-flex items-center px-4 py-2 ml-1 text-sm font-medium text-white duration-100 bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { props.gotoUpdateOrder(props.order._id) }}>
+
+                        <div class=" grid grid-cols-2 gap-1 hover:text-black duration-100">
+                            <div class="">
+                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                </svg>
                             </div>
-                        
+                            <div class="">
+                                Edit
+                            </div>
+                        </div>
+
                     </button>
                 </div>
                 <div class="">
@@ -98,8 +97,8 @@ export class OrderList extends Component {
         this.state = {
             order: [],
             searchOrder: "",
-            show:false,
-            display:false
+            show: false,
+            display: false
         };
     }
 
@@ -108,14 +107,14 @@ export class OrderList extends Component {
         this.refreshList();
     }
 
-    refreshList(){
+    refreshList() {
         axios.get('http://localhost:5000/order/')
-        .then(response => {
-            this.setState({ order: response.data })
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then(response => {
+                this.setState({ order: response.data })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     gotoViewOrder = (id) => {
@@ -124,14 +123,14 @@ export class OrderList extends Component {
             show: true
 
         })
-        console.log("LIst id is :" +id);
+        console.log("LIst id is :" + id);
     }
 
     //Modal box
     closeModalBoxForView = () => {
         this.setState({ show: false })
         this.refreshList();
-       
+
     }
 
     gotoUpdateOrder = (id) => {
@@ -140,23 +139,23 @@ export class OrderList extends Component {
             display: true
 
         })
-        console.log("LIst id is :" +id);
+        console.log("LIst id is :" + id);
     }
 
     //Modal box
     closeModalBoxForUpdate = () => {
         this.setState({ display: false })
         this.refreshList();
-       
+
     }
 
     deleteOrder(id) {
-        
+
         axios.delete('http://localhost:5000/order/' + id).then(response => {
             console.log(response.status)
-           
 
-            if(response.status == 200){
+
+            if (response.status == 200) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Successful',
@@ -168,7 +167,7 @@ export class OrderList extends Component {
 
                 this.refreshList();
             }
-            
+
             else {
                 Swal.fire({
                     icon: 'Unsuccess',
@@ -180,11 +179,11 @@ export class OrderList extends Component {
                 })
             }
 
-            
-        })
-        
 
-}
+        })
+
+
+    }
 
     orderList() {
         return this.state.order.map(currentorder => {
@@ -200,53 +199,50 @@ export class OrderList extends Component {
             ) {
                 return (
                     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-                         <td className='px-6 py-4'>{currentorder._id}</td>
-                      
-                        <td className='px-6 py-4'>{currentorder.item1}</td>
-                        <td className='px-6 py-4'>{currentorder.quantity1}</td>
-                        <td className='px-6 py-4'>{currentorder.item2}</td>
-                        <td className='px-6 py-4'>{currentorder.quantity2}</td>
-                        <td className='px-6 py-4'>{currentorder.item3}</td>
-                        <td className='px-6 py-4'>{currentorder.quantity3}</td>
-                        
+                        <td className='px-6 py-4'>{currentorder._id}</td>
+                        <td className='px-6 py-4'>{currentorder.item}</td>
+                        <td className='px-6 py-4'>{currentorder.quantity}</td>
+                        <td className='px-6 py-4'>{currentorder.orderFor}</td>
+                        <td className='px-6 py-4'>{currentorder.amount}</td>
+
                         <td className='px-6 py-4'> <span
-                class="text-base inline-block whitespace-nowrap rounded-full bg-green-400 p-1 hover:bg-green-500 hover:drop-shadow-md hover:text-white  px-2 pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                {currentorder.orderStatus}
-            </span></td>
+                            class="text-base inline-block whitespace-nowrap rounded-full bg-green-400 p-1 hover:bg-green-500 hover:drop-shadow-md hover:text-white  px-2 pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                            {currentorder.orderStatus}
+                        </span></td>
                         <td>
-                        <div class="">
-                                    <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-200' onClick={() => { this.gotoViewOrder(currentorder._id) }}>
-                                       
-                                            <div class=" grid grid-cols-2 gap-1">
-                                                <div class="">
-                                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                                    </svg>
-                                                </div>
-                                                <div class="">
-                                                    View
-                                                </div>
-                                            </div>
-                                       
-                                    </button>
-                                </div>
+                            <div class="">
+                                <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-200' onClick={() => { this.gotoViewOrder(currentorder._id) }}>
+
+                                    <div class=" grid grid-cols-2 gap-1">
+                                        <div class="">
+                                            <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="">
+                                            View
+                                        </div>
+                                    </div>
+
+                                </button>
+                            </div>
                         </td>
                         <td className='flex justify-center px-6 py-4'>
                             {
                                 <div class="">
                                     <button className='inline-flex items-center px-4 py-2 mr-1 text-sm font-medium text-white bg-indigo-500 rounded-md hover:bg-blue-200' onClick={() => { this.gotoUpdateOrder(currentorder._id) }}>
-                                       
-                                            <div class=" grid grid-cols-2 gap-1">
-                                                <div class="">
-                                                    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
-                                                    </svg>
-                                                </div>
-                                                <div class="">
-                                                    Edit
-                                                </div>
+
+                                        <div class=" grid grid-cols-2 gap-1">
+                                            <div class="">
+                                                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round " stroke-width="2" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                                </svg>
                                             </div>
-                                       
+                                            <div class="">
+                                                Edit
+                                            </div>
+                                        </div>
+
                                     </button>
                                 </div>
                             }
@@ -277,45 +273,44 @@ export class OrderList extends Component {
 
 
     exportOrder = () => {
-        console.log( "Export PDF" )
+        console.log("Export PDF")
 
 
         const unit = "pt";
-        const size = "A3"; 
-        const orientation = "landscape"; 
+        const size = "A3";
+        const orientation = "landscape";
         const marginLeft = 40;
-        const doc = new jsPDF( orientation, unit, size );
+        const doc = new jsPDF(orientation, unit, size);
 
         const title = "Order List Report ";
-        const headers = [["Order ID","Customer","Item1","Quantity1","Item2","Quantity2","Item3","Quantity3","Order For","Delivery Address","Amount","Order Status"]];
+        const headers = [["Order ID", "Customer", "Item", "Quantity", "Order For", "Delivery Address", "Amount", "Order Status", "Payment Status","Bank Name", "Account Name"]];
 
         const or = this.state.order.map(
-            Order=>[
+            Order => [
                 Order._id,
                 Order.customer,
-                Order.item1,
-                Order.quantity1,
-                Order.item2,
-                Order.quantity2,
-                Order.item3,
-                Order.quantity3,
+                Order.item,
+                Order.quantity,
                 Order.orderFor,
                 Order.deliveryAddress,
                 Order.amount,
                 Order.orderStatus,
+                Order.paymentStatus,
+                Order.bankName,
+                Order.accName,
             ]
         );
 
         let content = {
             startY: 50,
             head: headers,
-            body:or
+            body: or
         };
-        doc.setFontSize( 20 );
-        doc.text( title, marginLeft, 40 );
+        doc.setFontSize(20);
+        doc.text(title, marginLeft, 40);
         require('jspdf-autotable');
-        doc.autoTable( content );
-        doc.save( "Order-list.pdf" )
+        doc.autoTable(content);
+        doc.save("Order-list.pdf")
     }
 
 
@@ -333,14 +328,14 @@ export class OrderList extends Component {
                                         </th>
                                         <td className='flex justify-end gap-2'>
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end gap-2">
-                                                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                {/* <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                     <Link className='font-semibold text-white no-underline' to={"/creatOrder"}>
                                                         Add Order
-                                                    </Link></button>
+                                                    </Link></button> */}
                                                 <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => { this.exportOrder() }}>
-                                                    
-                                                        Download Report Here
-                                                    </button>
+
+                                                    Download Report Here
+                                                </button>
                                             </div>
                                             <div class="flex justify-end sm:flex-row sm:text-left sm:justify-end">
                                                 <input
@@ -363,15 +358,14 @@ export class OrderList extends Component {
                                 <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400' >
                                     <thead className='p-5 text-xs text-gray-700 uppercase border bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                                         <tr>
-                                        <th className="p-2 border-black tbhead">Order ID</th>
-                                            <th className="p-2 tbhead">Item 1</th>
-                                            <th className="p-2 tbhead">Quantity 1</th>
-                                            <th className="p-2 tbhead">Item 2</th>
-                                            <th className="p-2 tbhead">Quantity 2</th>
-                                            <th className="p-2 tbhead">Item 3</th>
-                                            <th className="p-2 tbhead">Quantity 3</th>
+                                            <th className="p-2 border-black tbhead">Order ID</th>
+                                            <th className="p-2 tbhead">Item</th>
+                                            <th className="p-2 tbhead">Quantity</th>
+                                            <th className="p-2 tbhead">Order For</th>
+                                            <th className="p-2 tbhead">Amount</th>
                                            
-                                           
+
+
                                             <th className="p-2 tbhead">Order Status</th>
                                             <th className="p-2 text-center tbhead">More Details</th>
                                             <th className="p-2 text-center tbhead">Actions</th>
@@ -395,7 +389,7 @@ export class OrderList extends Component {
                                         </div>
                                     </Modal.Header >
                                     <Modal.Body className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50'>
-                                        <ViewOrder orId={this.state.id} key={this.state.id}  />
+                                        <ViewOrder orId={this.state.id} key={this.state.id} />
                                     </Modal.Body>
                                 </Modal>
                             </div>

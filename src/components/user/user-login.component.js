@@ -130,7 +130,9 @@ export class UserLogin extends Component {
                         window.location = "/greenHouse"
                     }else if (isUserLoggedIn === true && currentuser.userRole == "Supplier Manager") {
                         window.location = "/supplier"
-                    } else if (isUserLoggedIn === false) {
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Order Manager") {
+                        window.location = "/order"
+                    }else if (isUserLoggedIn === false) {
                         window.location = "/nav"
                         window.location = "/"
                     }
