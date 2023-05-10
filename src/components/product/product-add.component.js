@@ -194,7 +194,7 @@ export class CreateProduct extends Component {
                                         <p className='text-4xl font-semibold text-black uppercase'>
                                             Add Product
                                         </p>
-                                        <div className="form-group">
+                                        {/* <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product ID</label>
                                             <input type="text"
                                                 required
@@ -202,7 +202,7 @@ export class CreateProduct extends Component {
                                                 value={this.state.productID}
                                                 onChange={this.onChangeproductID}
                                             />
-                                        </div>
+                                        </div> */}
                                         <div className="form-group">
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product Name</label>
                                             <input type="text"

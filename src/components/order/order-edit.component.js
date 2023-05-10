@@ -14,18 +14,18 @@ export default class EditOrder extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            id:props.orId,
+            id: props.orId,
             orderId: '',
-            customer:'',
+            customer: '',
             item: '',
             quantity: '',
-            orderFor:'',
-            deliveryAddress:'',
-            amount:'',
-            orderStatus:'',
-            paymentStatus:'',
-            bankName:'',
-            accName:''
+            orderFor: '',
+            deliveryAddress: '',
+            amount: '',
+            orderStatus: '',
+            paymentStatus: '',
+            bankName: '',
+            accName: ''
 
         }
     }
@@ -74,9 +74,9 @@ export default class EditOrder extends Component {
         const order = {
             customer: this.state.customer,
             item: this.state.item,
-          
+
             quantity: this.state.quantity,
-           
+
             orderFor: this.state.orderFor,
             deliveryAddress: this.state.deliveryAddress,
             amount: this.state.amount,
@@ -88,48 +88,48 @@ export default class EditOrder extends Component {
 
         console.log(order);
 
-        if(this.state.orderStatus == null){
-            this.setState({orderError : "Order Status Cannot be null"})
-        }else if(this.state.paymentStatus == null){
-            this.setState({payError : "Payment Status Cannot be null"})
-        }else{
+        if (this.state.orderStatus == null) {
+            this.setState({ orderError: "Order Status Cannot be null" })
+        } else if (this.state.paymentStatus == null) {
+            this.setState({ payError: "Payment Status Cannot be null" })
+        } else {
 
-        
-        axios.put('http://localhost:5000/order/'+this.state.id, order)
-           
 
-            .then(res => {
+            axios.put('http://localhost:5000/order/' + this.state.id, order)
 
-                console.log(res);
 
-                if (res.status === 200) {
-                    this.props.close();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: 'Order has been Updated!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
+                .then(res => {
 
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error in updating!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#e00404'
-                    })
-                }
-            })
+                    console.log(res);
+
+                    if (res.status === 200) {
+                        this.props.close();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successful',
+                            text: 'Order has been Updated!!',
+                            background: '#fff',
+                            confirmButtonColor: '#333533',
+                            iconColor: '#60e004'
+                        })
+
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error in updating!',
+                            background: '#fff',
+                            confirmButtonColor: '#333533',
+                            iconColor: '#e00404'
+                        })
+                    }
+                })
 
         }
 
     }
 
-    
+
 
     render() {
         return (
@@ -140,8 +140,8 @@ export default class EditOrder extends Component {
                             <div className=''>
                                 <div class="grid grid-cols-1 gap-4 content-start pt-5 px-20">
                                     <div className="formdiv">
-                                        <form className='px-12 py-12' onSubmit={this.onSubmit}>
-                                           
+                                        <form className='' onSubmit={this.onSubmit}>
+
                                             <div class="grid grid-cols-2 gap-4 form-group">
                                                 <div className="form-group">
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Order ID </label>
@@ -149,8 +149,8 @@ export default class EditOrder extends Component {
                                                         required
                                                         className="form-control"
                                                         value={this.state.orderId}
-                                                       
-                                                        
+
+
 
                                                     /><p />
                                                 </div>
@@ -161,7 +161,7 @@ export default class EditOrder extends Component {
                                                         className="form-control"
                                                         value={this.state.customer}
                                                         readOnly
-                                                     
+
                                                     />
                                                 </div>
                                             </div>
@@ -176,38 +176,38 @@ export default class EditOrder extends Component {
                                                     />
 
                                                 </div>
-                                               
-                                               
 
 
-                                               
-                                               
+
+
+
+
                                             </div>
-                                            
+
                                             <div class="grid grid-cols-2 gap-4 form-group">
-                                            <div className="form-group">
-                                                <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Order For</label>
-                                                <input type="text"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.orderFor}
-                                                    readOnly
-                                                   
-                                                />
-                                               
-                                            </div>
-                                            <div className="form-group">
-                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">Delivery Address</label>
-                                                <input type="text"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.deliveryAddress}
-                                                    readOnly
-                                                   
-                                                />
-                                               
-                                               
-                                            </div>
+                                                <div className="form-group">
+                                                    <label for="large-input" className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Order For</label>
+                                                    <input type="text"
+                                                        required
+                                                        className="form-control"
+                                                        value={this.state.orderFor}
+                                                        readOnly
+
+                                                    />
+
+                                                </div>
+                                                <div className="form-group">
+                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">Delivery Address</label>
+                                                    <input type="text"
+                                                        required
+                                                        className="form-control"
+                                                        value={this.state.deliveryAddress}
+                                                        readOnly
+
+                                                    />
+
+
+                                                </div>
                                             </div>
 
                                             <div class="grid grid-cols-2 gap-4 form-group">
@@ -218,8 +218,8 @@ export default class EditOrder extends Component {
                                                         readOnly
                                                         className="form-control"
                                                         value={this.state.amount}
-                                                       
-                                                       
+
+
                                                     />
                                                     <p />
                                                 </div>
@@ -227,11 +227,11 @@ export default class EditOrder extends Component {
                                                     <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Order Status</label>
                                                     <input type="text"
                                                         required
-                                                      
+
                                                         className="form-control"
                                                         value={this.state.orderStatus}
                                                         onChange={this.onChangeOrderStatus}
-                                                       
+
                                                     />
                                                     <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.orderError}</p>
 
@@ -244,7 +244,7 @@ export default class EditOrder extends Component {
                                                         required
                                                         className="form-control"
                                                         value={this.state.bankName}
-                                                       readOnly
+                                                        readOnly
                                                     />
                                                     <p />
                                                 </div>
@@ -254,28 +254,28 @@ export default class EditOrder extends Component {
                                                         required
                                                         className="form-control"
                                                         value={this.state.accName}
-                                                       readOnly
+                                                        readOnly
                                                     /><p />
                                                 </div>
                                             </div>
 
                                             <div className="form-group">
-                                                    <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Payment Status</label>
-                                                    <input type="text"
-                                                        required
-                                                        className="form-control"
-                                                        value={this.state.paymentStatus}
-                                                        onChange={this.onChangePaymentStatus}
-                                                    />
-                                                    <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.payError}</p>
+                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Payment Status</label>
+                                                <input type="text"
+                                                    required
+                                                    className="form-control"
+                                                    value={this.state.paymentStatus}
+                                                    onChange={this.onChangePaymentStatus}
+                                                />
+                                                <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.payError}</p>
 
-                                                </div>
-<p/>
+                                            </div>
+                                            <p />
 
-<div className="text-center align-middle form-group">
+                                            <div className="text-center align-middle form-group">
                                                 <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Update Order" />
                                             </div>
-                                            
+
                                         </form>
 
 

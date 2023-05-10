@@ -216,6 +216,7 @@ export class EditProduct extends Component {
                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Product ID</label>
                                             <input type="text"
                                                 required
+                                                disabled
                                                 className="form-control"
                                                 value={this.state.productID}
                                                 onChange={this.onChangeproductID}
@@ -239,9 +240,11 @@ export class EditProduct extends Component {
                                                 onChange={this.onChangeproductCategory}
                                             >
                                                 <option>Select Category</option>
-                                                <option>Pizza</option>
-                                                <option>Beverage</option>
-                                                <option>Other</option>
+                                                <option>Anniversary</option>
+                                                <option>Thankyou</option>
+                                                <option>Get Well Soon</option>
+                                                <option>Mother's day</option>
+                                                <option>Birthday</option>
                                             </select><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productCategoryError}</p>
                                         </div>
                                         <div className="form-group">

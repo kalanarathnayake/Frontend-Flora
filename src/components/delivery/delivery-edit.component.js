@@ -235,7 +235,7 @@ this.refreshList();
                                                         Status                                                    </label>
                                                     <input type="text"
                                                         className="form-control"
-                                                        disabled
+                                                        
                                                         value={this.state.orderStatus}
                                                         
                                                     />
