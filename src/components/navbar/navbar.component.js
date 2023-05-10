@@ -42,7 +42,7 @@ class navbar extends Component {
     }
     if (loggedUserRole != null && loggedUserRole === 'Inventory Manager') {
       loggedAsIManager = true;
-    } 
+    }
     if (loggedUserRole != null && loggedUserRole === 'Green House Manager') {
       loggedAsGHManager = true;
     }
@@ -61,8 +61,12 @@ class navbar extends Component {
           <nav className="flex flex-col w-full px-6 py-4 bg-white shadow sm:flex-row sm:text-left sm:justify-between sm:items-baseline">
             {unknownUser &&
               <>
-                <div className="mb-2 sm:mb-0">
-                  <a href="/" className="font-serif text-xl font-semibold text-pink-600 no-underline uppercase duration-300">Sonduruma mal<span class="">🌸</span></a>
+                <div className=" sm:mb-0">
+                  <a href="/" className="font-serif text-xl font-semibold text-pink-500 no-underline uppercase duration-300 drop-shadow-xl">
+                    <p class="hover:text-pink-800">
+                      Sonduruma mal<span class="">🌸</span>
+                    </p>
+                  </a>
                 </div>
                 <div class="">
                 </div>
@@ -79,7 +83,11 @@ class navbar extends Component {
             {isUserLoggedIn &&
               <>
                 <div className="mb-2 sm:mb-0">
-                  <a href="/" className="text-xl text-pink-600 no-underline duration-300 hover:text-pink-500 hover:font-bold">Home</a>
+                  <a href="/" className="font-serif text-xl font-semibold text-pink-500 no-underline uppercase duration-300 drop-shadow-xl">
+                    <p class="hover:text-pink-800 duration-200">
+                      Sonduruma mal<span class="">🌸</span>
+                    </p>
+                  </a>
                 </div>
                 <div className='text-lg font-light hover:text-pink-dark'>
                   {loggedAsEManager &&
@@ -98,7 +106,7 @@ class navbar extends Component {
                   {loggedAsCManager &&
                     <div>
                       <a href="/customer" className="m-2 text-black no-underline duration-300 hover:text-pink-800 hover:font-normal">Customer</a>
-                     
+
                     </div>
                   }
 
@@ -114,7 +122,7 @@ class navbar extends Component {
                     </>
                   }
 
-                  
+
 
                   {loggedAsGHManager &&
                     <>
@@ -129,7 +137,7 @@ class navbar extends Component {
                       </div>
                     </>
                   }
-                  
+
                   {loggedAsSManager &&
                     <>
                       <div>
