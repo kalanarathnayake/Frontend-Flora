@@ -12,9 +12,10 @@ function footer() {
                         </a>
                     </div>
                     <div class="px-5 py-2">
-                        <a href="/" class="leading-6 font-serif text-pink-600 no-underline font-bold  hover:text-gray-900">
-                            Contact Us Now <span class="text-black font-serif animate-pulse text-lg"> - 077-1556157</span>
+                        <a href="/" class="leading-6 font-serif text-pink-600 no-underline font-bold  hover:text-pink-900">
+                            Contact Us Now <span class="text-black font-mono animate-pulse text-lg"> - </span>
                         </a>
+                        <span class="text-pink-300 font-mono text-xs">pukfamilydevteam✌️</span>
                     </div>
 
                 </nav>
