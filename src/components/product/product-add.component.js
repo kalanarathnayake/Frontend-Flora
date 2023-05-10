@@ -117,14 +117,6 @@ export class CreateProduct extends Component {
         }
     };
 
-    // productID: '',
-    // productName: '',
-    // productCategory: '',
-    // description: '',
-    // image: '',
-    // price: '',
-    // discount: 0,
-    // availability: ''
 
     onSubmit(e) {
         e.preventDefault();
@@ -229,9 +221,11 @@ export class CreateProduct extends Component {
                                                 onChange={this.onChangeproductCategory}
                                             >
                                                 <option>Select Category</option>
-                                                <option>Pizza</option>
-                                                <option>Beverage</option>
-                                                <option>Other</option>
+                                                <option>Anniversary</option>
+                                                <option>Thankyou</option>
+                                                <option>Get Well Soon</option>
+                                                <option>Mother's day</option>
+                                                <option>Birthday</option>
                                             </select><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.productCategoryError}</p>
                                         </div>
                                         <div className="form-group">
@@ -287,7 +281,7 @@ export class CreateProduct extends Component {
                                                 id="file_input"
                                                 onChange={(e) => this.uploadImage(e)}
                                                 type="file"
-                                                 />
+                                            />
                                         </div>
                                         <div className="text-center align-middle form-group">
                                             <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Add Product" />

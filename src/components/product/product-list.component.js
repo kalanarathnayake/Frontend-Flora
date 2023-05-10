@@ -55,7 +55,6 @@ const Product = props => (
 )
 
 export class ProductList extends Component {
-
     constructor(props) {
         super(props);
         this.deleteProduct = this.deleteProduct.bind(this);
@@ -81,6 +80,16 @@ export class ProductList extends Component {
             })
     }
 
+    productList() {
+        return this.state.product.map(currentproduct => {
+            return <Product
+                product={currentproduct}
+                gotoUpdateProduct={this.gotoUpdateProduct}
+                deleteProduct={this.deleteProduct}
+                key={currentproduct._id} />;
+        })
+    }
+
     gotoUpdateProduct = (id) => {
         this.setState({
             id: id,
@@ -96,47 +105,43 @@ export class ProductList extends Component {
     }
 
     deleteProduct(id) {
-        axios.delete('http://localhost:5000/product/' + id).then(response => {
-            console.log(response.status)
-            // this.refreshTable();
+        axios.delete('http://localhost:5000/product/' + id)
+            .then(response => {
+                console.log(response.status)
+                // this.refreshTable();
 
-            if (response.status === 200) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successful',
-                    text: "Product has been deleted!!",
-                    background: '#fff',
-                    confirmButtonColor: '#0a5bf2',
-                    iconColor: '#60e004'
-                })
+                if (response.status === 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful',
+                        text: "Product has been deleted!!",
+                        background: '#fff',
+                        confirmButtonColor: '#0a5bf2',
+                        iconColor: '#60e004'
+                    })
 
-                this.refreshList();
-            }
+                    this.refreshList();
+                }
 
-            else {
-                Swal.fire({
-                    icon: 'Unsuccess',
-                    title: 'Unsuccessfull',
-                    text: "Product has not been deleted!!",
-                    background: '#fff',
-                    confirmButtonColor: '#eb220c',
-                    iconColor: '#60e004'
-                })
-            }
+                else {
+                    Swal.fire({
+                        icon: 'Unsuccess',
+                        title: 'Unsuccessfull',
+                        text: "Product has not been deleted!!",
+                        background: '#fff',
+                        confirmButtonColor: '#eb220c',
+                        iconColor: '#60e004'
+                    })
+                }
 
 
-        })
+            })
 
     }
 
-    productList() {
-        return this.state.product.map(currentproduct => {
-            return <Product product={currentproduct} gotoUpdateProduct={this.gotoUpdateProduct} deleteProduct={this.deleteProduct} key={currentproduct._id} />;
-        })
-    }
+
 
     searchProductList() {
-
         return this.state.product.map((currentproduct) => {
             if (
                 this.state.searchProduct === currentproduct.productName
