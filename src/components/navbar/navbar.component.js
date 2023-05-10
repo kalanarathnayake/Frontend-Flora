@@ -61,16 +61,22 @@ class navbar extends Component {
     return (
       <div>
         <div>
-          <nav className="flex flex-col w-full px-6 py-4 bg-white shadow sm:flex-row sm:text-left sm:justify-between sm:items-baseline">
+          <nav className="flex flex-col w-full px-6 py-2 bg-white shadow sm:flex-row sm:text-left sm:justify-between sm:items-baseline">
             {unknownUser &&
               <>
                 <div className=" sm:mb-0">
                   <a href="/" className="font-serif text-xl font-semibold text-pink-500 no-underline uppercase duration-300 drop-shadow-xl">
-                    <p class="hover:text-pink-800">
+                    {/* <p class="hover:text-pink-800">
                       Sonduruma mal<span class="">🌸</span>
-                    </p>
+                    </p> */}
+                    <img
+                    class="mx-auto w-36 pt-3 ml-2"
+                    src="https://media.discordapp.net/attachments/815160100993499176/1105799681289764864/1.png?width=881&height=165"
+                    alt="logo" />
                   </a>
+                  
                 </div>
+
                 <div class="">
                 </div>
                 <div className="grid grid-cols-2 gap-1">

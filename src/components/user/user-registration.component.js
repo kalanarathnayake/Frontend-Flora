@@ -210,12 +210,12 @@ export class UserRegistration extends Component {
                                         <div class="px-4 md:px-0 lg:w-6/12">
                                             <div class="md:mx-6 md:p-12">
                                                 <div class="text-center">
-                                                    {/* <img
+                                                    <img
                                                         class="mx-auto w-36"
-                                                        src="https://www.transcielos.com/wp-content/uploads/2018/08/Jetwing-travels.png"
-                                                        alt="logo" /> */}
-                                                    <h4 class="mb-12 mt-1 pb-1 text-xl font-bold drop-shadow-lg uppercase">
-                                                        We are The <span class="text-pink-600 text-2xl font-serif shadow-white drop-shadow-lg">Sonduruma Mal</span> Team
+                                                        src="https://media.discordapp.net/attachments/815160100993499176/1105799681289764864/1.png?width=881&height=165"
+                                                        alt="logo" />
+                                                    <h4 class="mb-12 mt-3 pb-1 text-xl font-bold drop-shadow-lg uppercase">
+                                                        We are The <span class="text-pink-600 text-2xl font-mono shadow-white drop-shadow-lg">Sonduruma Mal</span> Team
                                                     </h4>
                                                 </div>
                                                 <form className='' onSubmit={this.onSubmit}>
