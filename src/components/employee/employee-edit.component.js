@@ -207,14 +207,15 @@ export default class EditEmployee extends Component {
                                                     onChange={this.onChangeposition}
                                                 >
                                                     <option>Select From Here</option>
-                                                    <option>Waiter Staff</option>
-                                                    <option>Kitchen Head Chef</option>
+                                                    <option>Order Manager</option>
+                                                    <option>Supply Manager</option>
+                                                    <option>Green House Manager</option>
                                                     <option>Inventory Manager</option>
-                                                    <option>Driver</option>
                                                     <option>Delivery Manager</option>
                                                     <option>Employee Manager</option>
                                                     <option>Financial Manager</option>
                                                     <option>Product Manager</option>
+                                                    <option>Customer Manager</option>
                                                 </select>
                                                 <p />
                                                 <p />
