@@ -57,7 +57,7 @@ class navbar extends Component {
       loggedAsOManager = true;
     } if (loggedUserRole != null && loggedUserRole === 'Finance Manager') {
       loggedAsFManager = true;
-    }if (loggedUserRole != null && loggedUserRole === 'Customer') {
+    } if (loggedUserRole != null && loggedUserRole === 'Customer') {
       loggedAsCustomer = true;
     }
 
@@ -73,11 +73,11 @@ class navbar extends Component {
                       Sonduruma mal<span class="">🌸</span>
                     </p> */}
                     <img
-                    class="mx-auto w-36 pt-3 ml-2"
-                    src="https://media.discordapp.net/attachments/815160100993499176/1105799681289764864/1.png?width=881&height=165"
-                    alt="logo" />
+                      class="mx-auto w-36 pt-3 ml-2"
+                      src="https://media.discordapp.net/attachments/815160100993499176/1105799681289764864/1.png?width=881&height=165"
+                      alt="logo" />
                   </a>
-                  
+
                 </div>
 
                 <div class="">
@@ -96,13 +96,17 @@ class navbar extends Component {
               <>
                 <div className="mb-2 sm:mb-0">
                   <a href="/" className="font-serif text-xl font-semibold text-pink-500 no-underline uppercase duration-300 drop-shadow-xl">
-                    <p class="hover:text-pink-800 duration-200">
+                    {/* <p class="hover:text-pink-800 duration-200">
                       Sonduruma mal<span class="">🌸</span>
-                    </p>
+                    </p> */}
+                    <img
+                      class="mx-auto w-36 pt-3 ml-2"
+                      src="https://media.discordapp.net/attachments/815160100993499176/1105799681289764864/1.png?width=881&height=165"
+                      alt="logo" />
                   </a>
                 </div>
                 <div className='text-lg font-light hover:text-pink-dark'>
-                {loggedAsCustomer &&
+                  {loggedAsCustomer &&
                     <>
                       <div>
                         <a href="/cusProfile" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Profile</a>
@@ -179,7 +183,7 @@ class navbar extends Component {
                   {loggedAsDManager &&
                     <>
                       <div>
-                      <a href="/createDriver" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Add Driver</a>
+                        <a href="/createDriver" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Add Driver</a>
 
                         <a href="/delivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">All Deliveries</a>
                         <a href="/readyDelivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Ready Delivery</a>
