@@ -4,7 +4,7 @@ import * as Swal from "sweetalert2";
 import AuthenticationService from './AuthenticationService';
 import { withRouter } from 'react-router-dom';
 
-export class UserLogin extends Component {
+export class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.onChangeNIC = this.onChangeNIC.bind(this);
@@ -21,7 +21,7 @@ export class UserLogin extends Component {
         }
     }
     componentDidMount() {
-        axios.get('http://localhost:5000/customer/')
+        axios.get('http://localhost:5000/user/')
             .then(response => {
                 this.setState({ user: response.data })
             })
@@ -44,7 +44,7 @@ export class UserLogin extends Component {
     }
 
     getUserList() {
-        axios.get('http://localhost:5000/customer/')
+        axios.get('http://localhost:5000/user/')
             .then(response => {
                 this.setState({ user: response.data })
             })
@@ -91,7 +91,7 @@ export class UserLogin extends Component {
 
                     const userRole = currentuser.userRole;
                     console.log(userRole)
-                    AuthenticationService.successfulLogin(currentuser.NIC, currentuser.userRole,currentuser._id)
+                    AuthenticationService.successfulLogin(currentuser.NIC, currentuser.userRole)
                     console.log(currentuser.NIC, currentuser.userRole)
                     // browserHistory.push("/nav");
 
@@ -106,11 +106,33 @@ export class UserLogin extends Component {
 
                     const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
-                    if (isUserLoggedIn === true && currentuser.userRole == "Customer") {
+                    if (isUserLoggedIn === true && currentuser.userRole == "Employee Manager") {
+                        window.location = "/nav"
+                        window.location = "/employee"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Customer") {
                         window.location = "/nav"
                         window.location = "/cus"
                     }
-                    else if (isUserLoggedIn === false) {
+                    else if (isUserLoggedIn === true && currentuser.userRole == "Customer Manager") {
+                        window.location = "/customer"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Inventory Manager") {
+                        window.location = "/inventory"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Product Manager") {
+                        window.location = "/product"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Delivery Manager") {
+                        window.location = "/delivery"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Finance Manager") {
+                        window.location = "/salary"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Employee Manager") {
+                        window.location = "/employee"
+                    }
+                    else if (isUserLoggedIn === true && currentuser.userRole == "Green House Manager") {
+                        window.location = "/greenHouse"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Supplier Manager") {
+                        window.location = "/supplier"
+                    } else if (isUserLoggedIn === true && currentuser.userRole == "Order Manager") {
+                        window.location = "/order"
+                    } else if (isUserLoggedIn === false) {
                         window.location = "/nav"
                         window.location = "/"
                     }
@@ -159,11 +181,10 @@ export class UserLogin extends Component {
                                             <p class="mb-4 opacity-90 lead text-stone-50 font-bold uppercase" >
                                                 SUSTAINABLE Decoration IS AT OUR CORE
                                             </p>
-                                            
                                         </div>
                                         <div class="mb-12 lg:mb-0">
                                             <div class="block rounded-lg shadow-lg bg-white px-6 py-12 md:px-12">
-                                                <h2 class="text-3xl font-bold mb-12">Sign In As a <span class="text-indigo-900">Customer</span></h2>
+                                                <h2 class="text-3xl font-bold mb-12">Sign In As An <span class="text-indigo-900">Admin</span></h2>
                                                 <form className='' onSubmit={this.onSubmit}>
                                                     <div class="">
                                                         <div className="form-group">
@@ -184,14 +205,11 @@ export class UserLogin extends Component {
                                                                 onChange={this.onChangepassword}
                                                             /><p />
                                                         </div>
-                                                        
                                                         <div className="text-center align-middle form-group">
                                                             <input
                                                                 class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                                                 type="submit" value="Sign In" />
                                                         </div>
-                                                        <div className='mt-2'> <a href='/adminLogin'>Sign In As An Admin</a></div>
-                                                       
                                                     </div>
                                                 </form>
                                             </div>

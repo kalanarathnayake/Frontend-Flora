@@ -39,6 +39,10 @@ import { CreateGreenHouse } from './components/greenHouse/greenHouse-add.compone
 import { SupplierList } from './components/supplier/supplier-list.component';
 import { CreateSupplier } from './components/supplier/supplier-add.component';
 import CusHome from './components/navbar/cus-home.component';
+import { AdminLogin } from './components/user/admin-login.component';
+import { CustomerProfile } from './components/user/customer-profile.component';
+import { CreateDriver } from './components/delivery/driver-add.component';
+import ExpenseDashboard from './components/expenses/expense-dashboard.component';
 initTE({ Carousel }, true); // set second parameter to true if you want to use a debugger
 
 function App() {
@@ -69,6 +73,10 @@ function App() {
           <Route exact path="/nav" element={Navbar} />
           <Route exact path="/" element={<Home />} />
           <Route exact path="/cus" element={<CusHome />} />
+          <Route exact path="/adminLogin" element={<AdminLogin />} />
+          <Route exact path="/cusProfile" element={<CustomerProfile />} />
+          <Route exact path="/createDriver" element={<CreateDriver />} />
+          <Route exact path="/expenses" element={<ExpenseDashboard />} />
 
           <Route exact path="/employee" element={<EmployeeList />} />{/* Done */}
           <Route exact path="/creatEmployee" element={<CreateEmployee />} />{/* Done */}

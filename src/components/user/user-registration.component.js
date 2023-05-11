@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import * as Swal from "sweetalert2";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 export class UserRegistration extends Component {
     constructor(props) {
@@ -11,7 +13,6 @@ export class UserRegistration extends Component {
         this.onChangecpassword = this.onChangecpassword.bind(this);
         this.onChangeFullName = this.onChangeFullName.bind(this);
         this.onChangeDob = this.onChangeDob.bind(this);
-
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeContactNo = this.onChangeContactNo.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -20,7 +21,6 @@ export class UserRegistration extends Component {
         this.state = {
             fullName: '',
             dob: new Date(),
-
             email: '',
             contactNo: '',
             address: '',
@@ -88,15 +88,30 @@ export class UserRegistration extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const user = {
+        const customer = {
+            fullName: this.state.fullName,
+            dob: this.state.dob,
             NIC: this.state.NIC,
-            userRole: this.state.userRole,
-            password: this.state.password
+            email: this.state.email,
+            contactNo: this.state.contactNo,
+            address: this.state.address,
+            userRole:"Customer",
+            password:this.state.password
         }
+
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
         if (this.state.NIC.length < 10 || this.state.NIC.length > 12) {
 
             this.setState({ nicError: "Please enter a valid NIC" })
+        } else if (!this.state.email || regex.test(this.state.email) === false) {
+            this.setState({ emailError: "Please Enter a valid email." })
+        }else if (this.state.contactNo.length != 10) {
+
+            this.setState({ contactNoError: "Invalid Phone Number" })
+        }else if(this.state.address.length < 6){
+            this.setState({ addressError: "Address is too short" })
+
         }
 
         else if (this.state.password != this.state.cpassword) {
@@ -106,9 +121,9 @@ export class UserRegistration extends Component {
 
         else {
 
-            console.log(user);
+            console.log(customer);
 
-            axios.post('http://localhost:5000/customer/', user)
+            axios.post('http://localhost:5000/customer/', customer)
 
                 .then(res => {
 
@@ -186,6 +201,16 @@ export class UserRegistration extends Component {
                                                         <p className='text-base font-semibold text-black uppercase'>
                                                             Sign Up With Us
                                                         </p>
+                                                        <div className="grid grid-cols-2 gap-4 form-group">
+                                                        <div className="form-group">
+                                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Full Name </label>
+                                                            <input type="text"
+                                                                required
+                                                                className="form-control peer block min-h-[auto] w-full rounded border-1 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-solid"
+                                                                value={this.state.fullName}
+                                                                onChange={this.onChangeFullName}
+                                                            /><p/>
+                                                        </div>
                                                         <div className="form-group">
                                                             <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>NIC </label>
                                                             <input type="text"
@@ -195,28 +220,50 @@ export class UserRegistration extends Component {
                                                                 onChange={this.onChangeNIC}
                                                             /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.nicError}</p>
                                                         </div>
-                                                        <div className="form-group">
-                                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>User Role </label>
-                                                            <select type="text"
-                                                                required
-                                                                className="form-control peer block min-h-[auto] w-full rounded border-1 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                                                value={this.state.userRole}
-                                                                onChange={this.onChangeuserRole}
-                                                            >
-                                                                <option>Select From Here</option>
-                                                                <option>Employee Manager</option>
-                                                                <option>Customer Manager</option>
-                                                                <option>Inventory Manager</option>
-                                                                <option>Delivery Manager</option>
-                                                                <option>Product Manager</option>
-                                                                <option>Order Manager</option>
-                                                                <option>Finance Manager</option>
-                                                                <option>Green House Manager</option>
-                                                                <option>Supplier Manager</option>
-                                                                <option>Customer</option>
-                                                            </select>
-                                                            <p />
                                                         </div>
+                                                        <div className="grid grid-cols-2 gap-4 form-group">
+                                                        <div className="form-group">
+                                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Date Of Birth</label>
+                                                            <DatePicker
+                                                                viewBox="0 0 20 40"
+                                                                required
+                                                                dateFormat="MMMM d, yyyy"
+                                                                className='m-2'
+                                                                selected={this.state.dob}
+                                                                onChange={this.onChangeDob}
+                                                            /><p/>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Email</label>
+                                                            <input type="text"
+                                                                required
+                                                                className="form-control peer block min-h-[auto] w-full rounded border-1 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-solid"
+                                                                value={this.state.email}
+                                                                onChange={this.onChangeEmail}
+                                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.emailError}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="grid grid-cols-2 gap-4 form-group">
+                                                        <div className="form-group">
+                                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Contact Number</label>
+                                                            <input type="text"
+                                                                required
+                                                                className="form-control peer block min-h-[auto] w-full rounded border-1 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-solid"
+                                                                value={this.state.contactNo}
+                                                                onChange={this.onChangeContactNo}
+                                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.contactNoError}</p>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Address</label>
+                                                            <input type="text"
+                                                                required
+                                                                className="form-control peer block min-h-[auto] w-full rounded border-1 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-solid"
+                                                                value={this.state.address}
+                                                                onChange={this.onChangeAddress}
+                                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.addressError}</p>
+                                                        </div>
+                                                        </div>
+                                                       
                                                         <div className="grid grid-cols-2 gap-4 form-group">
                                                             <div className="form-group">
                                                                 <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Password </label>

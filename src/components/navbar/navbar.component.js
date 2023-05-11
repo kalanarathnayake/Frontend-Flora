@@ -25,6 +25,7 @@ class navbar extends Component {
     let loggedAsDManager = false;
     let loggedAsPManager = false;
     let loggedAsFManager = false;
+    let loggedAsCustomer = false;
     let unknownUser = false;
 
     if (isUserLoggedIn == true) {
@@ -56,6 +57,8 @@ class navbar extends Component {
       loggedAsOManager = true;
     } if (loggedUserRole != null && loggedUserRole === 'Finance Manager') {
       loggedAsFManager = true;
+    }if (loggedUserRole != null && loggedUserRole === 'Customer') {
+      loggedAsCustomer = true;
     }
 
     return (
@@ -99,6 +102,15 @@ class navbar extends Component {
                   </a>
                 </div>
                 <div className='text-lg font-light hover:text-pink-dark'>
+                {loggedAsCustomer &&
+                    <>
+                      <div>
+                        <a href="/cusProfile" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">My Profile</a>
+
+                      </div>
+                    </>
+                  }
+
                   {loggedAsEManager &&
                     <>
                       <div>
@@ -167,6 +179,8 @@ class navbar extends Component {
                   {loggedAsDManager &&
                     <>
                       <div>
+                      <a href="/createDriver" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Add Driver</a>
+
                         <a href="/delivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">All Deliveries</a>
                         <a href="/readyDelivery" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Ready Delivery</a>
 
@@ -179,6 +193,7 @@ class navbar extends Component {
                     <>
                       <div>
                         <a href="/salary" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Salary</a>
+                        {/* <a href="/expense" className="m-2 text-black no-underline duration-300 hover:text-orange-800 hover:font-normal">Expenses</a> */}
 
                       </div>
                     </>

@@ -1,8 +1,9 @@
 class AuthenticationService {
     
-    successfulLogin(NIC, userRole){
+    successfulLogin(NIC, userRole,_id){
         sessionStorage.setItem('authenticatedUserId', NIC);
         sessionStorage.setItem('authenticatedUserRole', userRole);
+        sessionStorage.setItem('authenticatedUserDBId', _id);
        
     }
 
@@ -36,6 +37,11 @@ class AuthenticationService {
     loggedUserRole() {
         let role = sessionStorage.getItem('authenticatedUserRole');
         if(role != null) return role;
+        return null;
+    }
+    loggedUserDBId() {
+        let id = sessionStorage.getItem('authenticatedUserDBId');
+        if(id != null) return id;
         return null;
     }
 

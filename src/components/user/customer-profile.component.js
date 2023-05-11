@@ -3,8 +3,9 @@ import axios from 'axios';
 import * as Swal from "sweetalert2";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
+import AuthenticationService from './AuthenticationService';
 
-export class CreateCustomer extends Component {
+export class CustomerProfile extends Component {
     constructor(props) {
         super(props);
         this.onChangeFullName = this.onChangeFullName.bind(this);
@@ -13,15 +14,41 @@ export class CreateCustomer extends Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeContactNo = this.onChangeContactNo.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
+        this.onChangepassword = this.onChangepassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
+            id:AuthenticationService.loggedUserDBId(),
             fullName: '',
             dob: new Date(),
             NIC: '',
             email: '',
             contactNo: '',
-            address: ''
+            address: '',
+            userRole:'',
+            password:''
         }
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:5000/customer/' + this.state.id)
+        .then(response => {
+            this.setState({
+                fullName: response.data.fullName,
+                dob: new Date(response.data.dob),
+                NIC: response.data.NIC,
+                email: response.data.email,
+                contactNo: response.data.contactNo,
+                address: response.data.address,
+                userRole: response.data.userRole,
+                password: response.data.password,
+
+            })
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
     }
 
     onChangeFullName(e) {
@@ -59,6 +86,11 @@ export class CreateCustomer extends Component {
             address: e.target.value
         });
     }
+    onChangepassword(e) {
+        this.setState({
+            password: e.target.value
+        });
+    }
 
     //onsubmit method
     onSubmit(e) {
@@ -69,7 +101,9 @@ export class CreateCustomer extends Component {
             NIC: this.state.NIC,
             email: this.state.email,
             contactNo: this.state.contactNo,
-            address: this.state.address
+            address: this.state.address,
+            userRole:"Customer",
+            password:this.state.password
         }
 
         //check payload is set
@@ -78,9 +112,7 @@ export class CreateCustomer extends Component {
         //validations
         const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-        if (this.state.fullName.length < 6) {
-            this.setState({ fullNameError: "Your Name is too short." })
-        } else if (this.state.dob.length < 1) {
+       if (this.state.dob.length < 1) {
             this.setState({ dobError: "Please Enter Date." })
         } else if (this.state.NIC.length < 10) {
             this.setState({ nicError: "Please Enter Valid ID number." })
@@ -91,14 +123,14 @@ export class CreateCustomer extends Component {
         } else if (this.state.address.length < 10) {
             this.setState({ addressError: "Your address is too short." })
         } else {
-            axios.post('http://localhost:5000/customer/', customer)
+            axios.put('http://localhost:5000/customer/' + this.state.id, customer)
                 .then(res => {
                     console.log(res);
                     if (res.status === 200) {
                         Swal.fire({
                             icon: 'success',
                             title: 'Successful',
-                            text: 'Customer has been added!!',
+                            text: 'Customer has been Updated!!',
                             background: '#fff',
                             confirmButtonColor: '#333533',
                             iconColor: '#60e004'
@@ -129,7 +161,8 @@ export class CreateCustomer extends Component {
             email: '',
             contactNo: '',
             address: '',
-            
+            userRole:'',
+            password:''
         })
     }
 
@@ -208,8 +241,17 @@ export class CreateCustomer extends Component {
                                                 onChange={this.onChangeAddress}
                                             /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.addressError}</p>
                                         </div>
+                                        <div className="form-group">
+                                            <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white'>Password</label>
+                                            <input type="password"
+                                                required
+                                                className="form-control"
+                                                value={this.state.password}
+                                                onChange={this.onChangepassword}
+                                            /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.addressError}</p>
+                                        </div>
                                         <div className="text-center align-middle form-group">
-                                            <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Create Customer" />
+                                            <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Update Details" />
                                         </div>
                                     </div>
                                 </form>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as Swal from "sweetalert2";
 
-export class CreateEmployee extends Component {
+export class CreateDriver extends Component {
     constructor(props) {
         super(props);
         this.onChangeempID = this.onChangeempID.bind(this);
@@ -67,7 +67,7 @@ export class CreateEmployee extends Component {
             contactNo: this.state.contactNo,
             email: this.state.email,
             address: this.state.address,
-            position: this.state.position
+            position: 'Driver'
         }
 
         //check payload
@@ -97,7 +97,7 @@ export class CreateEmployee extends Component {
                         Swal.fire({
                             icon: 'success',
                             title: 'Successful',
-                            text: 'Employee has been added!!',
+                            text: 'Driver has been added!!',
                             background: '#fff',
                             confirmButtonColor: '#333533',
                             iconColor: '#60e004'
@@ -138,7 +138,7 @@ export class CreateEmployee extends Component {
                                     <form className='px-12 py-12 border-2 rounded-lg shadow-md bg-gray-50' onSubmit={this.onSubmit}>
                                         <div class="">
                                             <p className='text-4xl font-semibold text-black uppercase'>
-                                                Add Employee
+                                                Add Driver
                                             </p>
                                             <div className="grid grid-cols-2 gap-4 form-group">
                                                 <div class="">
@@ -195,29 +195,9 @@ export class CreateEmployee extends Component {
                                                     onChange={this.onChangeaddress}
                                                 /><p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.addressError}</p>
                                             </div>
-                                            <div className="form-group ">
-                                                <label className='block mb-2 text-lg font-medium text-gray-900 dark:text-white' for="grid-state">Position</label>
-                                                <select type="text"
-                                                    required
-                                                    className="form-control"
-                                                    value={this.state.position}
-                                                    onChange={this.onChangeposition}
-                                                >
-                                                    <option>Select From Here</option>
-                                                    <option>Waiter Staff</option>
-                                                    <option>Kitchen Head Chef</option>
-                                                    <option>Inventory Manager</option>
-                                                    <option>Delivery Manager</option>
-                                                    <option>Employee Manager</option>
-                                                    <option>Financial Manager</option>
-                                                    <option>Product Manager</option>
-                                                    <option>Customer Manager</option>
-                                                </select>
-
-                                                <p className="block text-lg font-medium text-red-900 dark:text-white">{this.state.positionError}</p>
-                                            </div>
+                                           
                                             <div className="text-center align-middle form-group">
-                                                <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Add Employee" />
+                                                <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800' type="submit" value="Add Driver" />
                                             </div>
                                         </div>
                                     </form>
