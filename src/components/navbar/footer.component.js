@@ -15,8 +15,9 @@ function footer() {
                         <a href="/" class="leading-6 font-serif text-pink-600 no-underline font-bold  hover:text-pink-900">
                             Contact Us Now <span class="text-black font-mono animate-pulse text-lg"> - </span>
                         </a>
-                        <span class="text-pink-300 font-mono text-xs">pukfamilydevteam✌️</span>
-                    </div>
+                        {/* <span class="text-pink-300 font-mono text-xs">pukfamilydevteam✌️</span> */}
+                        <span class="text-pink-300 font-mono text-xs">0718002631✌️</span>
+                        </div>
 
                 </nav>
 
